@@ -1,13 +1,16 @@
 Summary:	LessTif - source compatible library with OSF/Motif® 1.2
 Name:		lesstif
 Version:	0.89.4
-Release:	2
+Release:	3
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
 Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.gz
 #Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-current.tar.gz
 Source1:	Mwm.desktop
+Source2:	mwmrc
+Source3:	mwmrc-pre
+Source4:	mwmrc-post
 Patch0:		lesstif-DESTDIR.patch
 Patch1:		lesstif-automake.patch
 Icon:		lesstif-realsmall.gif
@@ -195,6 +198,10 @@ rm -f doc/INSTALL.html
 
 install lib/Xbae/ac_find_xbae.m4 $RPM_BUILD_ROOT/usr/share/aclocal
 install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/gnome/wm-properties
+
+install %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/mwm/system.mwmrc
+install %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/mwm/
+install %{SOURCE4} $RPM_BUILD_ROOT/etc/X11/mwm/
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	clients/Motif-1.2/mwm/README \
