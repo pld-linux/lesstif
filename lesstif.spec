@@ -20,6 +20,8 @@ Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	man2html
 BuildRequires:	lynx
+BuildRequires:	flex
+BuildRequires:	bison
 BuildRequires:	autoconf
 BuildRequires:	automake
 Obsoletes:	lesstif-M20
@@ -252,7 +254,10 @@ install -d $RPM_BUILD_ROOT/{etc/{sysconfig/wmstyle,X11},usr/{share/aclocal,X11R6
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	mwmddir=/etc/X11/mwm \
-	htmldir=`pwd`/htmldoc
+	htmldir=/htmldoc
+
+mv -f $RPM_BUILD_ROOT/htmldoc .
+mv -f htmldoc/NOTES htmldoc/NOTES.html
 
 (cd lib/Xbae/src; make install DESTDIR=$RPM_BUILD_ROOT)
 
@@ -275,7 +280,7 @@ install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
 
 gzip -9nf clients/Motif-1.2/mwm/README \
 	AUTHORS BUG-REPORTING CREDITS CURRENT_NOTES ChangeLog \
-	KNOWN_BUGS NEWS NOTES README RELEASE-POLICY TODO \
+	KNOWN_BUGS NEWS README RELEASE-POLICY TODO \
 	doc/*.txt \
 	lib/Xbae/{AUTHORS,COPYING,FAQ,NEWS,README} \
 	lib/Xlt/{AUTHORS,NEWS,README}
@@ -329,9 +334,8 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %doc {AUTHORS,BUG-REPORTING,CREDITS,CURRENT_NOTES,ChangeLog,KNOWN_BUGS,NEWS}.gz
-%doc {NOTES,README,RELEASE-POLICY,TODO}.gz
-%doc doc/*.txt* doc/*.html doc/www.lesstif.org/{images/*gif,*html}
-%doc htmldoc
+%doc {README,RELEASE-POLICY,TODO}.gz
+%doc doc/*.txt* doc/*.html doc/www.lesstif.org/{images/*gif,*html} htmldoc/*
 
 %attr(755,root,root) %{_libdir}/libMrm.so
 %attr(755,root,root) %{_libdir}/libXm.so
