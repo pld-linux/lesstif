@@ -158,7 +158,7 @@ rm -rf $RPM_BUILD_ROOT
 /usr/X11R6/man/man3/*
 
 %files static
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 /usr/X11R6/lib/lib*.a
 
 %changelog
@@ -243,7 +243,7 @@ rm -rf $RPM_BUILD_ROOT
 
 * Wed Sep 10 1997 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.81-1]
-- changed alle %attr for %doc to (-, root, root),
+- changed alle %attr for %doc to (-,root,root),
 
 * Sun Jul 20 1997 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.80-2]
