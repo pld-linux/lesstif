@@ -2,6 +2,7 @@
 
 Summary:	LessTif - source compatible library with OSF/Motif %{motif_ver}
 Summary(es):	Clon de la caja de herramientas Motif
+Summary(ja):	lesstif - Motif¸ß´¹¥Ä¡¼¥ë¥­¥Ã¥È
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{motif_ver}
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
@@ -9,7 +10,7 @@ Version:	0.93.41
 Release:	1
 License:	LGPL
 Group:		X11/Libraries
-Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
 Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
@@ -45,6 +46,14 @@ of the Lesstif Toolkit.
 %description -l es
 Clon de la caja de herramientas Motif.
 
+%description -l ja
+
+
+Lesstif¤Ï¡¢Motif¥Ä¡¼¥ë¥­¥Ã¥È¤ÈAPI¥ì¥Ù¥ë¤Î¸ß´¹À­¤ò¤â¤Ä¥Ä¡¼¥ë¥­¥Ã¥È¤Ç¤¹¡£
+¸½ºß¤ÎLesstif¤Ï¡¢¤Û¤È¤ó¤É¤ÎAPI¤ò¼ÂÁõ¤·¤Æ¤¤¤Þ¤¹¤¬¡¢°ìÉô¤ÎÆâÉô´Ø¿ô¤Ï
+¤Þ¤À¼ÂÁõ¤µ¤ì¤Æ¤¤¤Þ¤»¤ó¡£Â¿¤¯¤ÎMotif¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¤ÏLesstif¤ò»È¤Ã¤Æ
+¥³¥ó¥Ñ¥¤¥ëµÚ¤Ó¼Â¹Ô¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
+
 %description -l pl
 Lesstif jest bibliotek± kompatybiln± z API Motif %{motif_ver}.
 Aktualnie implementacja jest czê¶ciowa, wiêkszo¶æ API istnieje, ale
@@ -55,6 +64,7 @@ O Lesstif é um clone do Motif, com a API compatível.
 
 %package mwm
 Summary:	Lesstif (Motif) window manager clone based on fvwm
+Summary(ja):	fvwm¤ò¥Ù¡¼¥¹¤Ë¤·¤¿Motif¥¦¥¤¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã
 Summary(pl):	Zarz±dca okien oparty na fvwm, ale korzystaj±cy z Lesstifa (Motifa)
 License:	GPL
 Group:		X11/Window Managers
@@ -72,6 +82,9 @@ resources.
 MWM es un administrador de ventanas que adhiere ampliamente a la
 especificación Motif.
 
+%description -l ja
+MWM¤Ï¡¢Motif¤Îmwm¥¹¥Ú¥Ã¥¯¤Ë½àµò¤·¤¿¥¦¥¤¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤Ç¤¹¡£
+
 %description mwm -l pl
 Wersja BETA mwm. Wywodzi siê z fvwm, a z nowym parserem rozumiej±cym
 sk³adniê mwmrc i zasoby Mwm.
@@ -82,6 +95,7 @@ Motif.
 
 %package clients
 Summary:	Lesstif clients
+Summary(ja):	lesstif¥¯¥é¥¤¥¢¥ó¥È
 Summary(pl):	Programy klienckie do Lesstifa
 License:	GPL
 Group:		X11/Applications
@@ -93,6 +107,9 @@ Uil and xmbind.
 
 %description clients -l es
 Clientes de lesstif.
+
+%description -l ja
+Uil¤Èxmbind
 
 %description clients -l pl
 Uil i xmbind.
