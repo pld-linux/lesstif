@@ -1,5 +1,5 @@
-%define		motif_ver		1.2
-
+%define		motif_ver	1.2
+%define		mver		%(echo %{motif_ver} | tr -d .)
 Summary:	LessTif - source compatible library with OSF/Motif %{motif_ver}
 Summary(es):	Clon de la caja de herramientas Motif
 Summary(ja):	lesstif - Motif¸ß´¹¥Ä¡¼¥ë¥­¥Ã¥È
@@ -7,7 +7,7 @@ Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.93.94
-Release:	2
+Release:	3
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
@@ -18,8 +18,9 @@ Source3:	mwm.RunWM
 Source4:	mwm.wm_style
 Source5:	mwm-xsession.desktop
 Patch0:		%{name}-amfix.patch
-Patch1:		%{name}-ac.patch
+Patch1:		%{name}-link.patch
 Patch2:		%{name}-am18.patch
+Patch3:		%{name}-freetype-includes.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -28,10 +29,14 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	libtool
 BuildRequires:	lynx
+%if %{mver} >= 20
+BuildRequires:	freetype-devel >= 2.1.0
+BuildRequires:	xft-devel
+%endif
 Provides:	motif = %{motif_ver}
 Obsoletes:	lesstif-M12
 Obsoletes:	lesstif-M20
-%if %(echo %{motif_ver} | sed s/\\.//) >= 20
+%if %{mver} >= 20
 # openmotif provides library version 2.1, so there will be conflicts
 Obsoletes:	openmotif
 %endif
@@ -173,6 +178,7 @@ Bibliotecas para o lesstif em versão estática.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
+%patch3 -p1
 
 # LT_HAVE_LIBXP, AC_FIND_XFT
 tail -n +7387 aclocal.m4 >> acinclude.m4
@@ -250,7 +256,11 @@ fi
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMrm.so.*.*
+%attr(755,root,root) %{_libdir}/libUil.so.*.*
 %attr(755,root,root) %{_libdir}/libXm.so.*.*
+%if %{mver} >= 21
+%attr(755,root,root) %{_libdir}/libDt.so.*.*
+%endif
 %{_mandir}/man1/lesstif.1*
 
 %files mwm
@@ -282,14 +292,24 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS BUG-REPORTING CREDITS ChangeLog NEWS README ReleaseNotes.txt
 %doc doc/*.txt* doc/*.html doc/www.lesstif.org/{images/*png,*html} htmldoc/*
+%attr(755,root,root) %{_bindir}/mxmkmf
 
 %attr(755,root,root) %{_libdir}/libMrm.so
+%attr(755,root,root) %{_libdir}/libUil.so
 %attr(755,root,root) %{_libdir}/libXm.so
 %{_libdir}/libMrm.la
+%{_libdir}/libUil.la
 %{_libdir}/libXm.la
-
 %{_includedir}/Mrm
 %{_includedir}/Xm
+%{_includedir}/uil
+
+%if %{mver} >= 21
+%attr(755,root,root) %{_libdir}/libDt.so
+%{_libdir}/libDt.la
+%{_includedir}/Dt
+%endif
+
 %{_aclocaldir}/ac_find_motif.m4
 
 %{_mandir}/man3/ApplicationShell.3*
@@ -311,4 +331,8 @@ fi
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libMrm.a
+%{_libdir}/libUil.a
 %{_libdir}/libXm.a
+%if %{mver} >= 21
+%{_libdir}/libDt.a
+%endif
