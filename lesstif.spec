@@ -69,7 +69,7 @@ A BETA release of mwm. It is derived from fvwm, with a new parser that
 understands mwmrc syntax, and a general understanding of Mwm
 resources.
 
-%description -l es mwm
+%description mwm -l es
 MWM es un administrador de ventanas que adhiere ampliamente a la
 especificación Motif.
 
@@ -77,7 +77,7 @@ especificación Motif.
 Wersja BETA mwm. Wywodzi siê z fvwm, a z nowym parserem rozumiej±cym
 sk³adniê mwmrc i zasoby Mwm.
 
-%description -l pt_BR mwm
+%description mwm -l pt_BR
 O MWM é um gerenciador de janelas que adere largamente à especificação
 Motif.
 
@@ -92,13 +92,13 @@ Obsoletes:	openmotif-clients
 %description clients
 Uil and xmbind.
 
-%description -l es clients
+%description clients -l es
 Clientes de lesstif.
 
 %description clients -l pl
 Uil i xmbind.
 
-%description -l pt_BR clients
+%description clients -l pt_BR
 lesstiff: Uil e xmbind.
 
 %package devel
@@ -115,7 +115,7 @@ Obsoletes:	openmotif-devel
 This package contains the lesstif header files required to develop
 Motif %{motif_ver} based applications.
 
-%description -l es devel
+%description devel -l es
 Bibliotecas y archivos de inclusión que se requieren para desarrollar
 aplicaciones basadas en lesstif/motif-%{motif_ver}.
 
@@ -123,7 +123,7 @@ aplicaciones basadas en lesstif/motif-%{motif_ver}.
 Pakiet zawiera pliki nag³ówkowe potrzebne do kompilacji aplikacji
 opartych o Motif %{motif_ver}.
 
-%description -l pt_BR devel
+%description devel -l pt_BR
 Bibliotecas e arquivos de inclusão requeridas para desenvolver
 aplicações baseadas no lesstif/motif-%{motif_ver}.
 
@@ -140,13 +140,13 @@ Obsoletes:	openmotif-static
 %description static
 This package contains the lesstif static libraries.
 
-%description -l es static
+%description static -l es
 Bibliotecas para lesstif en versión estática.
 
 %description static -l pl
 Biblioteki statyczne Lesstifa.
 
-%description -l pt_BR static
+%description static -l pt_BR
 Bibliotecas para o lesstif em versão estática.
 
 %prep
