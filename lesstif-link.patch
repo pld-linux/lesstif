@@ -1,9 +1,107 @@
---- lesstif-0.92.32/lib/Xbae/examples/draw/Makefile.am.orig	Mon May 21 11:03:37 2001
-+++ lesstif-0.92.32/lib/Xbae/examples/draw/Makefile.am	Fri Jun  8 15:50:08 2001
-@@ -18,5 +18,5 @@
+--- lesstif-0.93.94/lib/Xm/Makefile.am.orig	2001-08-29 18:06:48.000000000 +0200
++++ lesstif-0.93.94/lib/Xm/Makefile.am	2003-12-29 17:40:59.233896096 +0100
+@@ -34,8 +34,8 @@
+ 
+ if Version_1_2
+ 
+-#libXm_la_LIBADD = $(X_LIBS) -lXt $(X_PRE_LIBS) -lX11 \
+-#                  $(X_EXTRA_LIBS)
++libXm_la_LIBADD = $(X_LIBS) -lXt $(X_PRE_LIBS) -lX11 \
++                  $(X_EXTRA_LIBS)
+ 
+ 
+ lib_LTLIBRARIES=	libXm.la
+--- lesstif-0.93.94/lib/Mrm/Makefile.am.orig	2001-09-06 15:42:57.000000000 +0200
++++ lesstif-0.93.94/lib/Mrm/Makefile.am	2003-12-29 17:42:25.456788224 +0100
+@@ -13,7 +13,7 @@
+ 
+ lib_LTLIBRARIES=	libMrm.la
+ 
+-#libMrm_la_LIBADD = ../Xm/libXm.la
++libMrm_la_LIBADD = ../Xm/libXm.la
+ 
+ 
+ INCLUDES=	-I$(top_srcdir)/include/Motif-1.2 \
+--- lesstif-0.93.94/lib/Uil/Makefile.am.orig	2001-09-06 15:42:57.000000000 +0200
++++ lesstif-0.93.94/lib/Uil/Makefile.am	2003-12-29 17:43:10.781897760 +0100
+@@ -13,7 +13,7 @@
+ 
+ lib_LTLIBRARIES=	libUil.la
+ 
+-#libUil_la_LIBADD = $(X_LIBS) -lXt
++libUil_la_LIBADD = $(X_LIBS) -lXt
+ 
+ INCLUDES=	-I$(top_srcdir)/include/Motif-1.2 \
+ 		-I$(top_builddir)/include/Motif-1.2 \
+--- lesstif-0.93.94/lib/Xm-2.0/Makefile.am.orig	2001-08-29 18:06:48.000000000 +0200
++++ lesstif-0.93.94/lib/Xm-2.0/Makefile.am	2003-12-29 17:41:53.662621672 +0100
+@@ -27,8 +27,8 @@
+ XDND_SRC=
  endif
  
- LDADD=	../../src/libXbae.la \
--        @X_LIBS@ $(XMU) -lXt ${X_PRE_LIBS} -lXext -lX11 ${X_EXTRA_LIBS}
-+        @X_LIBS@ $(XMU) -lXt ${X_PRE_LIBS} -lXext -lX11 -lXpm ${X_EXTRA_LIBS}
+-#libXm_la_LIBADD = $(X_LIBS) -lXt $(X_PRE_LIBS) -lX11 \
+-#                  $(X_EXTRA_LIBS)
++libXm_la_LIBADD = $(X_LIBS) -lXt $(X_PRE_LIBS) -lX11 \
++                  $(X_EXTRA_LIBS) $(XFT_LIBS)
+ 
+ #
+ # Sources in another directory
+--- lesstif-0.93.94/lib/Mrm-2.0/Makefile.am.orig	2001-09-06 15:42:57.000000000 +0200
++++ lesstif-0.93.94/lib/Mrm-2.0/Makefile.am	2003-12-29 17:42:40.609484664 +0100
+@@ -42,7 +42,7 @@
+ 
+ lib_LTLIBRARIES= libMrm.la
+ 
+-#libMrm_la_LIBADD = ../Xm-2.0/libXm.la
++libMrm_la_LIBADD = ../Xm-2.0/libXm.la
+ 
+ 
+ # What was the purpose of that rule/dependency?
+--- lesstif-0.93.94/lib/Uil-2.0/Makefile.am.orig	2001-09-06 15:42:57.000000000 +0200
++++ lesstif-0.93.94/lib/Uil-2.0/Makefile.am	2003-12-29 17:43:21.493269384 +0100
+@@ -37,7 +37,7 @@
+ 
+ lib_LTLIBRARIES= libUil.la
+ 
+-#libUil_la_LIBADD = $(X_LIBS) -lXt
++libUil_la_LIBADD = $(X_LIBS) -lXt
+ 
+ libUil_la_SOURCES= ${SRCS_1_2:%=../Uil/%} ${SRCS_2_0}
+ 
+--- lesstif-0.93.94/lib/Xm-2.1/Makefile.am.orig	2001-08-29 18:06:48.000000000 +0200
++++ lesstif-0.93.94/lib/Xm-2.1/Makefile.am	2003-12-29 18:36:40.446954504 +0100
+@@ -21,7 +21,7 @@
+ XDND_SRC=
  endif
+ 
+-libXm_la_LIBADD = $(X_PRE_LIBS) -lXt $(XPLIB) $(X_LIBS) -lX11 $(X_EXTRA_LIBS)
++libXm_la_LIBADD = $(X_PRE_LIBS) -lXt $(XPLIB) $(X_LIBS) -lX11 $(X_EXTRA_LIBS) $(XFT_LIBS)
+ 
+ #if Have_Libxp
+ #libXm_la_LIBADD = -lXt $(X_PRE_LIBS) -lXp -lXext -lX11 \
+--- lesstif-0.93.94/lib/Uil-2.1/Makefile.am.orig	2001-09-06 15:42:57.000000000 +0200
++++ lesstif-0.93.94/lib/Uil-2.1/Makefile.am	2003-12-29 17:43:33.330469856 +0100
+@@ -43,7 +43,7 @@
+ 
+ lib_LTLIBRARIES= libUil.la
+ 
+-#libUil_la_LIBADD = $(X_LIBS) -lXt
++libUil_la_LIBADD = $(X_LIBS) -lXt
+ 
+ libUil_la_SOURCES= ${SRCS_1_2:%=../Uil/%} ${SRCS_2_0:%=../Uil-2.0/%}  ${SRCS_2_1}
+ 
+--- lesstif-0.93.94/configure.in.orig	2003-11-27 20:19:19.000000000 +0100
++++ lesstif-0.93.94/configure.in	2003-12-29 18:35:38.403386560 +0100
+@@ -563,7 +563,12 @@
+ dnl
+ dnl Experimental ! Keith Packard's Xft
+ dnl
++prexft_save_LIBS="$LIBS"
++LIBS=
+ AC_FIND_XFT
++XFT_LIBS="$LIBS"
++LIBS="$prexft_save_LIBS"
++AC_SUBST(XFT_LIBS)
+ dnl
+ 
+ dnl
