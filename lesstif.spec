@@ -146,7 +146,7 @@ rm -rf $RPM_BUILD_ROOT
 * Sun Jun  7 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.85-1]
 - added --disable-debug configure parameter,
-- fixed fiew typos.
+- fixed few typos.
 
 * Wed May 20 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.84-1]
