@@ -12,6 +12,7 @@ Patch0:		lesstif.optflags.patch
 Icon:		lesstif-realsmall.gif
 BuildRoot:	/tmp/%{name}-%{version}-root
 Obsoletes:	lesstif-M20, lesstif-M12
+Conflicts:	glibc <= 2.0.7
 
 %description
 Lesstif is an API compatible clone of the Motif 1.2 toolkit.
@@ -151,6 +152,8 @@ rm -rf $RPM_BUILD_ROOT
 %changelog
 * Sat Feb 27 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.87.9-1]
+- added "Conflicts: glibc <= 2.0.7" for preven installing with proper
+  version glibc,
 - simplifications in %files,
 - added %doc for /home/httpd/html/Lesstif-%%{version}/* files,
 - changed permission to 755 on /usr/X11R6/lib/lib*.so,
