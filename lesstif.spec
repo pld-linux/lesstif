@@ -135,7 +135,7 @@ rm -rf $RPM_BUILD_ROOT
 /home/httpd/html/Lesstif-%{version}/*
 
 %files static
-%attr(644, root, rppt) /usr/X11R6/lib/lib*.a
+%attr(644, root, root) /usr/X11R6/lib/lib*.a
 
 %changelog
 * Sun Aug 30 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
