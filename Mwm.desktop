@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Mwm
+Name[pl]=Mwm
+Comment=Motif Window Manager
+Exec=/usr/X11R6/bin/mwm
+TryExec=mwm
+
+[Window Manager]
+SessionManaged=true
