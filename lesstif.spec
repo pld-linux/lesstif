@@ -7,7 +7,7 @@ Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.93.94
-Release:	1
+Release:	2
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
@@ -19,6 +19,7 @@ Source4:	mwm.wm_style
 Source5:	mwm-xsession.desktop
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-ac.patch
+Patch2:		%{name}-am18.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -83,7 +84,7 @@ resources.
 MWM es un administrador de ventanas que adhiere ampliamente a la
 especificación Motif.
 
-%description -l ja
+%description mwm -l ja
 MWM¤Ï¡¢Motif¤Îmwm¥¹¥Ú¥Ã¥¯¤Ë½àµò¤·¤¿¥¦¥¤¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤Ç¤¹¡£
 
 %description mwm -l pl
@@ -109,7 +110,7 @@ Uil and xmbind.
 %description clients -l es
 Clientes de lesstif.
 
-%description -l ja
+%description clients -l ja
 Uil¤Èxmbind
 
 %description clients -l pl
@@ -171,16 +172,21 @@ Bibliotecas para o lesstif em versão estática.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+
+# LT_HAVE_LIBXP, AC_FIND_XFT
+tail -n +7387 aclocal.m4 >> acinclude.m4
+# LT_WITH_DMALLOC, LT_WITH_DBMALLOC
+tail -n +7269 aclocal.m4 | head -n 84 >> acinclude.m4
+ln -sf ../acinclude.m4 test/acinclude.m4
 
 %build
-rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
 cd test
-rm -f missing
-%{__aclocal} -I ..
+%{__aclocal}
 %{__autoconf}
 # -f must not be used here
 automake -a -c --foreign
