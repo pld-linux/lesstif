@@ -175,9 +175,3 @@ rm -rf $RPM_BUILD_ROOT
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/lib*.a
-
-%changelog
-* Fri May 28 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.88.1-1]
-- based on RH spec,
-- spec rewrited by PLD team.
