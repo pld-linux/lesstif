@@ -147,6 +147,13 @@ make install \
 
 (cd lib/Xbae/src; make install DESTDIR=$RPM_BUILD_ROOT)
 
+rm -rf $RPM_BUILD_ROOT%{_libdir}/lib{Mrm,Xm}*
+rm -rf $RPM_BUILD_ROOT%{_includedir}/{Mrm,Xm}
+mv $RPM_BUILD_ROOT%{_prefix}/LessTif/Motif1.2/include/{Mrm,Xm} \
+	$RPM_BUILD_ROOT%{_includedir}
+mv $RPM_BUILD_ROOT%{_prefix}/LessTif/Motif1.2/lib/* \
+	$RPM_BUILD_ROOT%{_libdir}
+
 rm -f doc/INSTALL.html
 
 install lib/Xbae/ac_find_xbae.m4 $RPM_BUILD_ROOT/usr/share/aclocal
