@@ -11,6 +11,7 @@ Release:	1
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
+# Source0-md5:	7d1b5397f9b6aa15e7d6df8be1151a06
 Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
