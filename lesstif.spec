@@ -156,11 +156,13 @@ Bibliotecas para o lesstif em versão estática.
 %patch1 -p1
 
 %build
-aclocal
+rm -f missing
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 cd test
-aclocal
+rm -f missing
+%{__aclocal}
 %{__autoconf}
 %{__automake}
 cd ..
