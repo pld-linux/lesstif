@@ -1,0 +1,241 @@
+diff -Nur lesstif-0.92.32.orig/clients/Motif-1.2/mwm/Makefile.am lesstif-0.92.32/clients/Motif-1.2/mwm/Makefile.am
+--- lesstif-0.92.32.orig/clients/Motif-1.2/mwm/Makefile.am	Fri Jun  8 21:25:35 2001
++++ lesstif-0.92.32/clients/Motif-1.2/mwm/Makefile.am	Fri Jun  8 21:37:35 2001
+@@ -5,7 +5,6 @@
+ if Version_1_2
+ bin_PROGRAMS=	mwm
+ endif
+-bindir = $(exec_prefix)/LessTif/Motif1.2/bin
+ 
+ MAINTAINERCLEANFILES=Makefile.in mwmlex.c mwmparse.c mwmparse.h
+ 
+@@ -50,12 +49,6 @@
+ mwmlex.o: mwmparse.h
+ 
+ YFLAGS=		-d
+-
+-install-data-hook:
+-if DefaultVersion12
+-	-rm -f $(DESTDIR)$(exec_prefix)/bin/$(bin_PROGRAMS)
+-	(cd $(DESTDIR)$(exec_prefix)/bin && $(LN_S) ../LessTif/Motif1.2/bin/$(bin_PROGRAMS) .)
+-endif
+ 
+ install-data-local:
+ if DefaultVersion12
+diff -Nur lesstif-0.92.32.orig/clients/Motif-1.2/uil/Makefile.am lesstif-0.92.32/clients/Motif-1.2/uil/Makefile.am
+--- lesstif-0.92.32.orig/clients/Motif-1.2/uil/Makefile.am	Tue May  1 14:37:20 2001
++++ lesstif-0.92.32/clients/Motif-1.2/uil/Makefile.am	Fri Jun  8 21:37:59 2001
+@@ -6,7 +6,6 @@
+ bin_PROGRAMS=	uil
+ noinst_PROGRAMS   = newuil
+ endif
+-bindir = $(exec_prefix)/LessTif/Motif1.2/bin
+ 
+ MAINTAINERCLEANFILES=Makefile.in lex.c yacc.c yacc.h
+ 
+@@ -35,9 +34,3 @@
+ lex.o:		yacc.h
+ 
+ YFLAGS=		-d
+-
+-install-data-hook:
+-if DefaultVersion12
+-	-rm -f $(DESTDIR)$(exec_prefix)/bin/$(bin_PROGRAMS)
+-	(cd $(DESTDIR)$(exec_prefix)/bin && $(LN_S) ../LessTif/Motif1.2/bin/$(bin_PROGRAMS) .)
+-endif
+diff -Nur lesstif-0.92.32.orig/clients/Motif-1.2/xmbind/Makefile.am lesstif-0.92.32/clients/Motif-1.2/xmbind/Makefile.am
+--- lesstif-0.92.32.orig/clients/Motif-1.2/xmbind/Makefile.am	Tue May  1 14:37:20 2001
++++ lesstif-0.92.32/clients/Motif-1.2/xmbind/Makefile.am	Fri Jun  8 21:38:19 2001
+@@ -5,7 +5,6 @@
+ if Version_1_2
+ bin_PROGRAMS=	xmbind
+ endif
+-bindir = $(exec_prefix)/LessTif/Motif1.2/bin
+ 
+ MAINTAINERCLEANFILES=Makefile.in
+ 
+@@ -17,9 +16,3 @@
+ 		$(X_LIBS) -lXt $(X_PRE_LIBS) -lX11 $(X_EXTRA_LIBS)
+ 
+ xmbind_SOURCES=	xmbind.c
+-
+-install-data-hook:
+-if DefaultVersion12
+-	-rm -f $(DESTDIR)$(exec_prefix)/bin/$(bin_PROGRAMS)
+-	(cd $(DESTDIR)$(exec_prefix)/bin && $(LN_S) ../LessTif/Motif1.2/bin/$(bin_PROGRAMS) .)
+-endif
+diff -Nur lesstif-0.92.32.orig/include/Motif-1.2/Mrm/Makefile.am lesstif-0.92.32/include/Motif-1.2/Mrm/Makefile.am
+--- lesstif-0.92.32.orig/include/Motif-1.2/Mrm/Makefile.am	Wed Oct 11 21:36:14 2000
++++ lesstif-0.92.32/include/Motif-1.2/Mrm/Makefile.am	Fri Jun  8 21:39:51 2001
+@@ -12,18 +12,10 @@
+ # Lets put the headers in a sub directory to avoid
+ # poluting /usr/local with more directories for default installs.
+ #
+-mrmdir =	$(prefix)/LessTif/Motif1.2/include/Mrm
++mrmdir =	$(includedir)/Mrm
+ 
+ if Version_1_2
+ 
+ mrm_HEADERS=	$(h)
+ 
+ endif
+-install-data-hook:
+-if Version_1_2
+-if DefaultVersion12
+-	if [ -d $(DESTDIR)$(prefix)/include/Mrm ]; then rm -rf $(DESTDIR)$(prefix)/include/Mrm; else rm -f $(DESTDIR)$(prefix)/include/Mrm; fi
+-	(mkdir -p $(DESTDIR)$(prefix)/include && cd $(DESTDIR)$(prefix)/include && $(LN_S) ../LessTif/Motif1.2/include/Mrm Mrm)
+-endif
+-endif
+-
+diff -Nur lesstif-0.92.32.orig/include/Motif-1.2/Xm/Makefile.am lesstif-0.92.32/include/Motif-1.2/Xm/Makefile.am
+--- lesstif-0.92.32.orig/include/Motif-1.2/Xm/Makefile.am	Wed Oct 11 21:36:18 2000
++++ lesstif-0.92.32/include/Motif-1.2/Xm/Makefile.am	Fri Jun  8 21:40:25 2001
+@@ -79,7 +79,7 @@
+ # Lets put the headers in a sub directory to avoid
+ # poluting /usr/local with more directories for default installs.
+ #
+-xmdir=	$(prefix)/LessTif/Motif1.2/include/Xm
++xmdir=	$(includedir)/Xm
+ 
+ if Version_1_2
+ 
+@@ -97,11 +97,4 @@
+ #
+ xm_HEADERS = $(xm_12_h)
+ 
+-endif
+-install-data-hook:
+-if Version_1_2
+-if DefaultVersion12
+-	if [ -d $(DESTDIR)$(prefix)/include/Xm ]; then rm -rf $(DESTDIR)$(prefix)/include/Xm; else rm -f $(DESTDIR)$(prefix)/include/Xm; fi
+-	(mkdir -p $(DESTDIR)$(prefix)/include && cd $(DESTDIR)$(prefix)/include && $(LN_S) ../LessTif/Motif1.2/include/Xm Xm)
+-endif
+ endif
+diff -Nur lesstif-0.92.32.orig/include/Motif-1.2/uil/Makefile.am lesstif-0.92.32/include/Motif-1.2/uil/Makefile.am
+--- lesstif-0.92.32.orig/include/Motif-1.2/uil/Makefile.am	Wed Oct 25 12:16:07 2000
++++ lesstif-0.92.32/include/Motif-1.2/uil/Makefile.am	Fri Jun  8 21:41:07 2001
+@@ -12,18 +12,10 @@
+ # Lets put the headers in a sub directory to avoid
+ # poluting /usr/local with more directories for default installs.
+ #
+-uildir =	$(prefix)/LessTif/Motif1.2/include/uil
++uildir =	$(includedir)/uil
+ 
+ if Version_1_2
+ 
+ uil_HEADERS=	$(h)
+ 
+ endif
+-install-data-hook:
+-if Version_1_2
+-if DefaultVersion12
+-	if [ -d $(DESTDIR)$(prefix)/include/uil ]; then rm -rf $(DESTDIR)$(prefix)/include/uil; else rm -f $(DESTDIR)$(prefix)/include/uil; fi
+-	(mkdir -p $(DESTDIR)$(prefix)/include && cd $(DESTDIR)$(prefix)/include && $(LN_S) ../LessTif/Motif1.2/include/uil uil)
+-endif
+-endif
+-
+diff -Nur lesstif-0.92.32.orig/lib/Mrm/Makefile.am lesstif-0.92.32/lib/Mrm/Makefile.am
+--- lesstif-0.92.32.orig/lib/Mrm/Makefile.am	Wed May  9 22:38:00 2001
++++ lesstif-0.92.32/lib/Mrm/Makefile.am	Fri Jun  8 21:43:15 2001
+@@ -4,7 +4,6 @@
+ MAINTAINERCLEANFILES=Makefile.in
+ 
+ libMrm_la_LDFLAGS=	-version-info 1:2
+-libdir = $(exec_prefix)/LessTif/Motif1.2/lib
+ 
+ EXTRA_DIST=		Mrm.c lookup.c misc.c \
+ 			lookup.h misc.h uil.h
+@@ -27,23 +26,4 @@
+ libMrm_la_SOURCES=	Mrm.c lookup.c misc.c \
+ 			lookup.h misc.h uil.h
+ 
+-endif
+-install-data-hook:	libMrm.la
+-if Version_1_2
+-if LibtoolShared
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libMrm.so.1*
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libMrm.so.1* .)
+-endif
+-if DefaultVersion12
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libMrm.la
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libMrm.la .)
+-if LibtoolShared
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libMrm.so
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libMrm.so .)
+-endif
+-if LibtoolStatic
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libMrm.a
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libMrm.a .)
+-endif
+-endif
+ endif
+diff -Nur lesstif-0.92.32.orig/lib/Uil/Makefile.am lesstif-0.92.32/lib/Uil/Makefile.am
+--- lesstif-0.92.32.orig/lib/Uil/Makefile.am	Wed May  9 22:39:14 2001
++++ lesstif-0.92.32/lib/Uil/Makefile.am	Fri Jun  8 21:43:29 2001
+@@ -4,7 +4,6 @@
+ MAINTAINERCLEANFILES=Makefile.in
+ 
+ libUil_la_LDFLAGS=	-version-info 1:2
+-libdir = $(exec_prefix)/LessTif/Motif1.2/lib
+ 
+ EXTRA_DIST=		Uil.c  UilData.c  uillex.c  uilparse.c  uilsym.c
+ 
+@@ -24,23 +23,4 @@
+ libUil_la_SOURCES=	Uil.c  UilData.c  uillex.c  uilparse.c  uilsym.c
+ 
+ 
+-endif
+-install-data-hook:	libUil.la
+-if Version_1_2
+-if LibtoolShared
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libUil.so.1*
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libUil.so.1* .)
+-endif
+-if DefaultVersion12
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libUil.la
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libUil.la .)
+-if LibtoolShared
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libUil.so
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libUil.so .)
+-endif
+-if LibtoolStatic
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libUil.a
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libUil.a .)
+-endif
+-endif
+ endif
+diff -Nur lesstif-0.92.32.orig/lib/Xm/Makefile.am lesstif-0.92.32/lib/Xm/Makefile.am
+--- lesstif-0.92.32.orig/lib/Xm/Makefile.am	Sat May 12 12:35:15 2001
++++ lesstif-0.92.32/lib/Xm/Makefile.am	Fri Jun  8 21:44:42 2001
+@@ -30,7 +30,6 @@
+ endif
+ 
+ libXm_la_LDFLAGS=	-version-info 1:2
+-libdir = $(exec_prefix)/LessTif/Motif1.2/lib
+ 
+ if Version_1_2
+ 
+@@ -52,23 +51,4 @@
+ 
+ libXm_la_SOURCES=	$(src) $(XDND_SRCS)
+ 
+-endif
+-install-data-hook:	libXm.la
+-if Version_1_2
+-if LibtoolShared
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libXm.so.1*
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libXm.so.1* .)
+-endif
+-if DefaultVersion12
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libXm.la
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libXm.la .)
+-if LibtoolShared
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libXm.so
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libXm.so .)
+-endif
+-if LibtoolStatic
+-	-rm -f $(DESTDIR)$(exec_prefix)/lib/libXm.a
+-	(cd $(DESTDIR)$(exec_prefix)/lib && $(LN_S) ../LessTif/Motif1.2/lib/libXm.a .)
+-endif
+-endif
+ endif

@@ -143,3 +143,16 @@
 -#
 -install-data-hook:
 -	if [ ! -h $(DESTDIR)$(prefix)/LessTif/doc/Lessdox ]; then mkdir -p $(DESTDIR)$(prefix)/LessTif/doc && cd $(DESTDIR)$(prefix)/LessTif/doc && $(LN_S) html Lessdox; fi
+--- ./include/Makefile.am.orig	Wed May 16 14:56:09 2001
++++ ./include/Makefile.am	Fri Jun  8 14:28:27 2001
+@@ -4,8 +4,8 @@
+ MAINTAINERCLEANFILES=Makefile.in stamp-h.in LTconfig.h.in
+ DIST_SUBDIRS = Motif-1.2 Motif-2.0 Motif-2.1
+ 
+-# Leave this statement in for automake 1.4* !!
+-SUBDIRS = Motif-1.2
++# Leave this statement in for automake 1.4* !! - but not for automake 1.4d
++#SUBDIRS = Motif-1.2
+ 
+ if Version_2_1
+     SUBDIRS = Motif-1.2 Motif-2.0  Motif-2.1

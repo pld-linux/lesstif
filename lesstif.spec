@@ -14,8 +14,9 @@ Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
 Source4:	mwm.wm_style
-Patch0:		%{name}-DESTDIR.patch
-Patch1:		%{name}-automake.patch
+Patch0:		%{name}-automake.patch
+Patch1:		%{name}-link.patch
+Patch2:		%{name}-Motif1.2paths.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -225,8 +226,9 @@ Biblioteka statyczna Xlt.
 %prep
 %setup -q
 #%setup -q -n %{name}-current
-#%patch0 -p1
+%patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 #find . -name CVS -exec rm -rf {} \; 2> /dev/null ||
 
@@ -234,6 +236,7 @@ Biblioteka statyczna Xlt.
 aclocal
 autoconf
 automake -a -c
+(cd lib/Xbae ; aclocal ; autoconf ; automake -a -c)
 %configure \
 	--enable-shared \
 	--enable-static \
@@ -255,24 +258,20 @@ automake -a -c
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{/etc/{sysconfig/wmstyle,X11},%{_aclocaldir},%{_wmpropsdir}}
 
+# avoid relinking
+for f in lib/Mrm/libMrm.la lib/Xlt/lib/libXlt.la lib/Xbae/src/libXbae.la ; do
+	grep -v '^relink_command' $f > $f.new
+	mv -f $f.new $f
+done
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	mwmddir=/etc/X11/mwm \
 	htmldir=/htmldoc
 
 mv -f $RPM_BUILD_ROOT/htmldoc .
-mv -f htmldoc/NOTES htmldoc/NOTES.html
 
-(cd lib/Xbae/src; make install DESTDIR=$RPM_BUILD_ROOT)
-
-rm -rf $RPM_BUILD_ROOT%{_libdir}/lib{Mrm,Xm}*
-rm -rf $RPM_BUILD_ROOT%{_includedir}/{Mrm,Xm}
-mv -f $RPM_BUILD_ROOT%{_prefix}/LessTif/Motif1.2/include/{Mrm,Xm} \
-	$RPM_BUILD_ROOT%{_includedir}
-mv -f $RPM_BUILD_ROOT%{_prefix}/LessTif/Motif1.2/lib/* \
-	$RPM_BUILD_ROOT%{_libdir}
-
-rm -f doc/INSTALL.html
+rm -f doc/www.lesstif.org/INSTALL.html
 
 # workaround - configure decides not to install *.m4 if aclocaldir is not writable
 install scripts/autoconf/ac_find_motif.m4 $RPM_BUILD_ROOT%{_aclocaldir}
@@ -285,11 +284,11 @@ install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
 
 gzip -9nf clients/Motif-1.2/mwm/README \
-	AUTHORS BUG-REPORTING CREDITS CURRENT_NOTES ChangeLog \
-	KNOWN_BUGS NEWS README RELEASE-POLICY TODO \
+	AUTHORS BUG-REPORTING CREDITS ChangeLog \
+	KNOWN_BUGS NEWS README RELEASE-POLICY \
 	doc/*.txt \
-	lib/Xbae/{AUTHORS,COPYING,FAQ,NEWS,README} \
-	lib/Xlt/{AUTHORS,NEWS,README}
+	lib/Xbae/{AUTHORS,ChangeLog,COPYING,NEWS,README} \
+	lib/Xlt/{AUTHORS,ChangeLog,README}
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -339,9 +338,8 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc {AUTHORS,BUG-REPORTING,CREDITS,CURRENT_NOTES,ChangeLog,KNOWN_BUGS,NEWS}.gz
-%doc {README,RELEASE-POLICY,TODO}.gz
-%doc doc/*.txt* doc/*.html doc/www.lesstif.org/{images/*gif,*html} htmldoc/*
+%doc {AUTHORS,BUG-REPORTING,CREDITS,ChangeLog,KNOWN_BUGS,NEWS,README,RELEASE-POLICY}.gz
+%doc doc/*.txt* doc/*.html doc/www.lesstif.org/{images/*png,*html} htmldoc/*
 
 %attr(755,root,root) %{_libdir}/libMrm.so
 %attr(755,root,root) %{_libdir}/libXm.so
@@ -378,7 +376,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Xbae-devel
 %defattr(644,root,root,755)
-%doc lib/Xbae/{AUTHORS,COPYING,FAQ,NEWS,README}.gz
+%doc lib/Xbae/{AUTHORS,ChangeLog,COPYING,NEWS,README}.gz lib/Xbae/FAQ.html
 %attr(755,root,root) %{_libdir}/libXbae.so
 %attr(755,root,root) %{_libdir}/libXbae.la
 %{_includedir}/Xbae
@@ -395,7 +393,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files -n Xlt-devel
 %defattr(644,root,root,755)
-%doc lib/Xlt/{AUTHORS,NEWS,README}.gz
+%doc lib/Xlt/{AUTHORS,ChangeLog,README}.gz
 %attr(755,root,root) %{_libdir}/libXlt.so
 %attr(755,root,root) %{_libdir}/libXlt.la
 %{_includedir}/Xlt
