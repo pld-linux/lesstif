@@ -32,6 +32,8 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
 
+%define		_wmpropsdir	%{_datadir}/wm-properties
+
 %description
 Lesstif is an API compatible clone of the Motif 1.2 toolkit. Currently
 Lesstif is partially implemented with most of the API in place. Saying
@@ -249,7 +251,7 @@ automake -a -c
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/{sysconfig/wmstyle,X11},usr/{share/aclocal,X11R6/share/gnome/wm-properties}}
+install -d $RPM_BUILD_ROOT{/etc/{sysconfig/wmstyle,X11},%{_aclocaldir},%{_wmpropsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -270,11 +272,13 @@ mv -f $RPM_BUILD_ROOT%{_prefix}/LessTif/Motif1.2/lib/* \
 
 rm -f doc/INSTALL.html
 
-install lib/Xbae/ac_find_xbae.m4 $RPM_BUILD_ROOT/usr/share/aclocal
-install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/gnome/wm-properties
+# workaround - configure decides not to install *.m4 if aclocaldir is not writable
+install scripts/autoconf/ac_find_motif.m4 $RPM_BUILD_ROOT%{_aclocaldir}
+install lib/Xlt/ac_find_*.m4 $RPM_BUILD_ROOT%{_aclocaldir}
+install lib/Xbae/ac_find_xbae.m4 $RPM_BUILD_ROOT%{_aclocaldir}
 
+install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
-
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
 
@@ -313,7 +317,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc clients/Motif-1.2/mwm/README*
 %dir /etc/X11/mwm
-/usr/X11R6/share/gnome/wm-properties/Mwm.desktop
+%{_wmpropsdir}/Mwm.desktop
 %config /etc/X11/mwm/*
 %attr(755,root,root) /etc/sysconfig/wmstyle/*.sh
 /etc/sysconfig/wmstyle/*.names
@@ -344,6 +348,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %{_includedir}/Mrm
 %{_includedir}/Xm
+%{_aclocaldir}/ac_find_motif.m4
 
 %{_mandir}/man3/Composite.3*
 %{_mandir}/man3/Constraint.3*
@@ -375,7 +380,7 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libXbae.so
 %attr(755,root,root) %{_libdir}/libXbae.la
 %{_includedir}/Xbae
-/usr/share/aclocal/ac_find_xbae.m4
+%{_aclocaldir}/ac_find_xbae.m4
 %{_mandir}/man3/Xbae*
 
 %files -n Xbae-static
@@ -392,6 +397,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libXlt.so
 %attr(755,root,root) %{_libdir}/libXlt.la
 %{_includedir}/Xlt
+%{_aclocaldir}/ac_find_xlt.m4
+%{_aclocaldir}/ac_find_xpm.m4
 %{_mandir}/man3/Xlt*
 
 %files -n Xlt-static
