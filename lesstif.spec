@@ -10,8 +10,8 @@ Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar
 Patch0:		lesstif.optflags.patch
 Patch1:		lesstif-mwmrc_path.patch
 Icon:		lesstif-realsmall.gif
-BuildPrereq:	XFree86-devel
-BuildPrereq:	man2html
+BuildRequires:	XFree86-devel
+BuildRequires:	man2html
 BuildRoot:	/tmp/%{name}-%{version}-root
 Obsoletes:	lesstif-M20
 Obsoletes:	lesstif-M12
