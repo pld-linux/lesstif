@@ -7,7 +7,11 @@ License:	LGPL
 Group:		X11/Libraries
 Group(de):	X11/Libraries
 Group(es):	X11/Bibliotecas
+Group(fr):	X11/Librairies
 Group(pl):	X11/Biblioteki
+Group(pt_BR):	X11/Bibliotecas
+Group(ru):	X11/Библиотеки
+Group(uk):	X11/Б╕бл╕отеки
 Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.bz2
 #Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-current.tar.bz2
 Source1:	Mwm.desktop
@@ -90,7 +94,12 @@ Summary(pl):	Pliki nagЁСwkowe do API Lesstif/Motif 1.2
 License:	LGPL
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/Разработка/Библиотеки
+Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 Provides:	motif-devel
 
@@ -108,7 +117,12 @@ Summary(pl):	Biblioteki statyczne Lesstifa
 License:	LGPL
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/Разработка/Библиотеки
+Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	%{name}-devel = %{version}
 Provides:	motif-static
 
@@ -125,7 +139,11 @@ Copyright:	Bell Communications Research (distributable)
 Group:		X11/Libraries
 Group(de):	X11/Libraries
 Group(es):	X11/Bibliotecas
+Group(fr):	X11/Librairies
 Group(pl):	X11/Biblioteki
+Group(pt_BR):	X11/Bibliotecas
+Group(ru):	X11/Библиотеки
+Group(uk):	X11/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description -n Xbae
@@ -150,7 +168,12 @@ Summary(pl):	Pliki nagЁСwkowe i dokumentacja do XbaeMatrix
 Copyright:	Bell Communications Research (distributable)
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/Разработка/Библиотеки
+Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	Xbae = %{version}
 
 %description -n Xbae-devel
@@ -165,7 +188,12 @@ Summary(pl):	Biblioteka statyczna XbaeMatrix
 Copyright:	Bell Communications Research (distributable)
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/Разработка/Библиотеки
+Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	Xbae-devel = %{version}
 
 %description -n Xbae-static
@@ -180,8 +208,12 @@ Summary(pl):	Biblioteka rozszerzeЯ do LessTifa
 License:	LGPL
 Group:		X11/Libraries
 Group(de):	X11/Libraries
+Group(fr):	X11/Librairies
 Group(es):	X11/Bibliotecas
 Group(pl):	X11/Biblioteki
+Group(pt_BR):	X11/Bibliotecas
+Group(ru):	X11/Библиотеки
+Group(uk):	X11/Б╕бл╕отеки
 Requires:	%{name} = %{version}
 
 %description -n Xlt
@@ -199,7 +231,12 @@ Summary(pl):	Pliki nagЁСwkowe i dokumentacja Xlt
 License:	LGPL
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/Разработка/Библиотеки
+Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	Xlt = %{version}
 
 %description -n Xlt-devel
@@ -214,7 +251,12 @@ Summary(pl):	Biblioteka statyczna Xlt
 License:	LGPL
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
+Group(es):	X11/Desarrollo/Bibliotecas
+Group(fr):	X11/Development/Librairies
 Group(pl):	X11/Programowanie/Biblioteki
+Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
+Group(ru):	X11/Разработка/Библиотеки
+Group(uk):	X11/Розробка/Б╕бл╕отеки
 Requires:	Xlt-devel = %{version}
 
 %description -n Xlt-static
@@ -346,8 +388,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libMrm.la
 %attr(755,root,root) %{_libdir}/libXm.la
 
-#%{_includedir}/Mrm
-#%{_includedir}/Xm
+%{_includedir}/Mrm
+%{_includedir}/Xm
 %{_aclocaldir}/ac_find_motif.m4
 
 %{_mandir}/man3/Composite.3*
