@@ -37,6 +37,7 @@ Copyright:	GPL
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Requires:	%{name} = %{version}
+Requires:	wmconfig >= 0.9.8-3
 
 %description mwm
 A BETA release of mwm.  It is derived from fvwm, with a new parser that
