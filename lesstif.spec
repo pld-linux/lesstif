@@ -1,7 +1,7 @@
 Summary:	LessTif - source compatible library with OSF/Motif® 1.2
 Name:		lesstif
-Version:	0.87.9
-Release:	1
+Version:	0.87.1
+Release:	2
 #Release:	@DATE@
 Copyright:	LGPL
 Group:		X11/Libraries
@@ -72,12 +72,16 @@ This package contains the lesstif static libraries.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure	--prefix=/usr/X11R6 \
-		--enable-shared \
-		--enable-static \
-		--enable-production \
-		--disable-debug \
-		--enable-build-12
+./configure \
+	--prefix=/usr/X11R6 \
+	--enable-shared \
+	--enable-static \
+	--enable-production \
+	--disable-debug \
+	--enable-build-12 \
+	--disable-build-20 \
+	--disable-default-20
+make
 
 %install
 rm -rf $RPM_BUILD_ROOT
@@ -151,7 +155,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %changelog
 * Sat Feb 27 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.87.9-1]
+  [0.87.1-2]
 - added "Conflicts: glibc <= 2.0.7" for preven installing with proper
   version glibc,
 - simplifications in %files,
