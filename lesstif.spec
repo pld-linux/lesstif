@@ -7,7 +7,7 @@ Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.93.94
-Release:	3
+Release:	4
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
@@ -21,6 +21,7 @@ Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-link.patch
 Patch2:		%{name}-am18.patch
 Patch3:		%{name}-freetype-includes.patch
+Patch4:		%{name}-libdir.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -75,7 +76,7 @@ Summary(ja):	fvwm¤ò¥Ù¡¼¥¹¤Ë¤·¤¿Motif¥¦¥¤¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã
 Summary(pl):	Zarz±dca okien oparty na fvwm, ale korzystaj±cy z Lesstifa (Motifa)
 License:	GPL
 Group:		X11/Window Managers
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	wmconfig >= 0.9.9-5
 Requires:	xinitrc >= 3.0
 Obsoletes:	openmotif-mwm
@@ -106,7 +107,7 @@ Summary(ja):	lesstif¥¯¥é¥¤¥¢¥ó¥È
 Summary(pl):	Programy klienckie do Lesstifa
 License:	GPL
 Group:		X11/Applications
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Obsoletes:	openmotif-clients
 
 %description clients
@@ -130,7 +131,7 @@ Summary(es):	Bibliotecas y archivos de inclusión para desarrollo del lesstif
 Summary(pl):	Pliki nag³ówkowe do API Lesstif/Motif %{motif_ver}
 Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimentos com o lesstif
 Group:		X11/Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{version}-%{release}
 Requires:	XFree86-devel
 Provides:	motif-devel = %{motif_ver}
 Obsoletes:	openmotif-devel
@@ -158,7 +159,7 @@ Summary(es):	Bibliotecas para lesstif en versión estática
 Summary(pl):	Biblioteki statyczne Lesstifa
 Summary(pt_BR):	Bibliotecas para o lesstif em versão estática
 Group:		X11/Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{version}-%{release}
 Provides:	motif-static
 Obsoletes:	openmotif-static
 
@@ -180,6 +181,7 @@ Bibliotecas para o lesstif em versão estática.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
+%patch4 -p1
 
 # LT_HAVE_LIBXP, AC_FIND_XFT
 tail -n +7387 aclocal.m4 >> acinclude.m4
@@ -220,13 +222,10 @@ rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig/wmstyle,X11} \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_datadir}/xsessions,%{_wmpropsdir}}
 
-# for proper app-defaults path
-install -d $RPM_BUILD_ROOT{%{_appdefsdir},%{_libdir}}
-ln -sf ../X11R6/lib/X11 $RPM_BUILD_ROOT%{_libdir}/X11
-
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	mwmddir=%{_sysconfdir}/X11/mwm \
+	appdir=%{_appdefsdir} \
 	htmldir=/htmldoc
 
 mv -f $RPM_BUILD_ROOT/htmldoc .
