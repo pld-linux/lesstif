@@ -1,12 +1,13 @@
 Summary:	LessTif - source compatible library with OSF/Motif® 1.2
 Name:		lesstif
 Version:	0.89.0
-Release:	2
+Release:	3
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
 Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.gz
 #Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-current.tar.gz
+Source1:	Mwm.desktop
 Patch0:		lesstif-DESTDIR.patch
 Patch1:		lesstif-automake.patch
 Icon:		lesstif-realsmall.gif
@@ -138,7 +139,7 @@ make mwmddir=/etc/X11/mwm
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/X11,usr/share/aclocal}
+install -d $RPM_BUILD_ROOT/{etc/X11,usr/{share/aclocal,X11R6/share/gnome/wm-properties}}
 
 make install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -157,6 +158,7 @@ mv $RPM_BUILD_ROOT%{_prefix}/LessTif/Motif1.2/lib/* \
 rm -f doc/INSTALL.html
 
 install lib/Xbae/ac_find_xbae.m4 $RPM_BUILD_ROOT/usr/share/aclocal
+install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/gnome/wm-properties
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	clients/Motif-1.2/mwm/README \
@@ -192,6 +194,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc clients/Motif-1.2/mwm/README*
 %dir /etc/X11/mwm
+/usr/X11R6/share/gnome/wm-properties/Mwm.desktop
 %config /etc/X11/mwm/*
 %attr(755,root,root) %{_bindir}/mwm
 
