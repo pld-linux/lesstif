@@ -123,6 +123,12 @@ strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
+%post mwm
+if [ -L /etc/X11/mwm ]; then
+	rm -rf /etc/X11/mwm
+	rm -rf /usr/X11R6/lib/X11/mwm/*
+fi
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
