@@ -83,8 +83,7 @@ make install \
 	man1dir=$RPM_BUILD_ROOT/usr/X11R6/man/man1 \
 	man3dir=$RPM_BUILD_ROOT/usr/X11R6/man/man3 \
 	man5dir=$RPM_BUILD_ROOT/usr/X11R6/man/man5 \
-	htmldir=$RPM_BUILD_ROOT/home/httpd/html/Lesstif-%{version} \
-	html_DATA="*.html"
+	htmldir=$RPM_BUILD_ROOT/home/httpd/html/Lesstif-%{version}
 
 strip $RPM_BUILD_ROOT/usr/X11R6/{lib/lib*.so,bin/{mwm,uil,xmbind}}
 
