@@ -1,8 +1,8 @@
 Summary:	LessTif - source compatible library with OSF/Motif® 1.2
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif 1.2
 Name:		lesstif
-Version:	0.89.4
-Release:	5
+Version:	0.92.26
+Release:	1
 License:	LGPL
 Group:		X11/Libraries
 Group(de):	X11/Libraries
