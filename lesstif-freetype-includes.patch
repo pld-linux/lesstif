@@ -1,5 +1,5 @@
---- lesstif-0.93.95/ac_find_xft.m4.orig	2004-02-01 16:49:40.000000000 +0100
-+++ lesstif-0.93.95/ac_find_xft.m4	2004-08-07 16:46:53.708535808 +0200
+--- lesstif-0.93.97/acinclude.m4.orig	2004-02-01 16:49:40.000000000 +0100
++++ lesstif-0.93.97/acinclude.m4	2004-08-07 16:46:53.708535808 +0200
 @@ -114,7 +114,7 @@
  LIBS="$LIBS $freetype_lib"
  saved_CPPFLAGS="$CPPFLAGS"
