@@ -18,6 +18,8 @@ Patch0:		%{name}-DESTDIR.patch
 Patch1:		%{name}-automake.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
+BuildRequires:	autoconf
+BuildRequires:	automake
 BuildRequires:	man2html
 BuildRequires:	lynx
 BuildRequires:	flex
@@ -323,7 +325,7 @@ rm -rf $RPM_BUILD_ROOT
 /etc/sysconfig/wmstyle/*.names
 %attr(755,root,root) %{_bindir}/mwm
 
-%config %{_libdir}/X11/app-defaults/*
+%{_libdir}/X11/app-defaults/*
 
 %{_mandir}/man1/mwm.1*
 %{_mandir}/man5/mwmrc.5*
