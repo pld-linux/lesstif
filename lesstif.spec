@@ -20,7 +20,7 @@ Source2:	mwmrc
 Source3:	mwm.RunWM
 Source4:	mwm.wm_style
 Patch0:		%{name}-am.patch
-Icon:		%{name}-realsmall.gif
+Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
