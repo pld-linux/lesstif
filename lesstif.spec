@@ -47,8 +47,6 @@ of the Lesstif Toolkit.
 Clon de la caja de herramientas Motif.
 
 %description -l ja
-
-
 Lesstifは、MotifツールキットとAPIレベルの互換性をもつツールキットです。
 現在のLesstifは、ほとんどのAPIを実装していますが、一部の内部関数は
 まだ実装されていません。多くのMotifアプリケーションはLesstifを使って
