@@ -5,8 +5,8 @@ Summary(es):	Clon de la caja de herramientas Motif
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{motif_ver}
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
-Version:	0.93.18
-Release:	3
+Version:	0.93.41
+Release:	1
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.bz2
@@ -14,25 +14,26 @@ Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
 Source4:	mwm.wm_style
-Patch0:		%{name}-am.patch
-Patch1:		%{name}-am16.patch
+Patch0:		%{name}-amfix.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	lynx
-BuildRequires:	flex
 BuildRequires:	bison
+BuildRequires:	flex
+BuildRequires:	libtool
+BuildRequires:	lynx
 Obsoletes:	lesstif-M20
 Obsoletes:	lesstif-M12
 %if %(echo %{motif_ver} | sed s/\\.//) >= 20
-# openmotif provides library version 2.1, so there witl be conflicts
+# openmotif provides library version 2.1, so there will be conflicts
 Obsoletes:	openmotif
 %endif
 Provides:	motif = %{motif_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_wmpropsdir	/usr/share/wm-properties
+%define		addir		/usr/X11R6/lib/X11/app-defaults
 
 %description
 Lesstif is an API compatible clone of the Motif %{motif_ver} toolkit.
@@ -42,7 +43,7 @@ missing. The primary objectives have been to develop the widget code
 of the Lesstif Toolkit.
 
 %description -l es
-Clon de la caja de herramientas Motif
+Clon de la caja de herramientas Motif.
 
 %description -l pl
 Lesstif jest bibliotek± kompatybiln± z API Motif %{motif_ver}.
@@ -108,6 +109,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}
 Provides:	motif-devel = %{motif_ver}
 Obsoletes:	openmotif-devel
+Conflicts:	tcl-devel < 8.3.4-8
 
 %description devel
 This package contains the lesstif header files required to develop
@@ -150,7 +152,6 @@ Bibliotecas para o lesstif em versão estática.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
 rm -f missing
@@ -160,10 +161,10 @@ rm -f missing
 %{__automake}
 cd test
 rm -f missing
-%{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I ..
 %{__autoconf}
-%{__automake}
+# -f must not be used here
+automake -a -c --foreign
 cd ..
 
 %configure \
@@ -185,6 +186,10 @@ cd ..
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig/wmstyle,X11},%{_aclocaldir},%{_wmpropsdir}}
 
+# for proper app-defaults path
+install -d $RPM_BUILD_ROOT{%{addir},%{_libdir}}
+ln -sf ../X11R6/lib/X11 $RPM_BUILD_ROOT%{_libdir}/X11
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	mwmddir=%{_sysconfdir}/X11/mwm \
@@ -201,15 +206,6 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
-
-install -d $RPM_BUILD_ROOT%{_mandir}/man1
-install -d $RPM_BUILD_ROOT%{_mandir}/man3
-install -d $RPM_BUILD_ROOT%{_mandir}/man5
-
-mv -f 	$RPM_BUILD_ROOT%{_usr}/man/man1/*		$RPM_BUILD_ROOT%{_mandir}/man1/
-mv -f   $RPM_BUILD_ROOT%{_usr}/man/man3/*		$RPM_BUILD_ROOT%{_mandir}/man3/
-mv -f   $RPM_BUILD_ROOT%{_usr}/man/man5/*		$RPM_BUILD_ROOT%{_mandir}/man5/
-
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -239,7 +235,7 @@ fi
 /etc/sysconfig/wmstyle/*.names
 %attr(755,root,root) %{_bindir}/mwm
 
-%{_libdir}/X11/app-defaults/*
+%{addir}/*
 
 %{_mandir}/man1/mwm.1*
 %{_mandir}/man5/mwmrc.5*
@@ -249,6 +245,7 @@ fi
 %doc doc/UIL.txt*
 %attr(755,root,root) %{_bindir}/uil
 %attr(755,root,root) %{_bindir}/xmbind
+%{_mandir}/man1/uil.1*
 %{_mandir}/man1/xmbind.1*
 
 %files devel
@@ -265,12 +262,12 @@ fi
 %{_includedir}/Xm
 %{_aclocaldir}/ac_find_motif.m4
 
+%{_mandir}/man3/ApplicationShell.3*
 %{_mandir}/man3/Composite.3*
 %{_mandir}/man3/Constraint.3*
 %{_mandir}/man3/Core.3*
 %{_mandir}/man3/LessTifInternals.3*
-# conficts with tcl-devel
-#{_mandir}/man3/Object.3*
+%{_mandir}/man3/Object.3*
 %{_mandir}/man3/OverrideShell.3*
 %{_mandir}/man3/Rect.3*
 %{_mandir}/man3/Shell.3*
