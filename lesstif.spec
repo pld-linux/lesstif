@@ -1,8 +1,7 @@
 Summary:	LessTif - source compatible library with OSF/Motif® 1.2
 Name:		lesstif
 Version:	0.87.1
-Release:	2
-#Release:	@DATE@
+Release:	3
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -10,9 +9,12 @@ Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar
 #Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-current.tar.gz
 Patch0:		lesstif.optflags.patch
 Icon:		lesstif-realsmall.gif
+BuildPrereq:	XFree86-devel
+BuildPrereq:	man2html
 BuildRoot:	/tmp/%{name}-%{version}-root
-Obsoletes:	lesstif-M20, lesstif-M12
-Conflicts:	glibc <= 2.0.7
+Obsoletes:	lesstif-M20
+Obsoletes:	lesstif-M12
+
 
 %description
 Lesstif is an API compatible clone of the Motif 1.2 toolkit.
@@ -72,7 +74,7 @@ This package contains the lesstif static libraries.
 
 %build
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure \
+./configure %{_target} \
 	--prefix=/usr/X11R6 \
 	--enable-shared \
 	--enable-static \
@@ -102,7 +104,11 @@ ln -sf ../../usr/X11R6/lib/X11/mwm $RPM_BUILD_ROOT/etc/X11/mwm
 
 rm -f doc/INSTALL.html
 
-gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man*/*
+gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man*/* \
+	clients/Motif-1.2/mwm/README \
+	AUTHORS BUG-REPORTING CREDITS CURRENT_NOTES ChangeLog \
+	KNOWN_BUGS NEWS NOTES README RELEASE-POLICY TODO \
+	doc/*.txt
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -111,12 +117,13 @@ gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man*/*
 rm -rf $RPM_BUILD_ROOT
 
 %files
+%defattr(644,root,root,755)
 %attr(755,root,root)/usr/X11R6/lib/lib*.so.*.*
-%attr(644,root,root) /usr/X11R6/man/man1/lesstif.1.*
+/usr/X11R6/man/man1/lesstif.1.*
 
 %files mwm
 %defattr(644,root,root,755)
-%doc clients/Motif-1.2/mwm/README doc/MWM.txt
+%doc clients/Motif-1.2/mwm/README*
 %dir /etc/X11/mwm
 %dir /usr/X11R6/lib/X11/mwm
 %attr(755,root,root) /usr/X11R6/bin/mwm
@@ -128,17 +135,17 @@ rm -rf $RPM_BUILD_ROOT
 /usr/X11R6/man/man5/mwmrc.5.*
 
 %files clients
-%attr(644,root,root,755)
-%doc doc/UIL.txt
+%defattr(644,root,root,755)
+%doc doc/UIL.txt*
 %attr(755,root,root) /usr/X11R6/bin/uil
 %attr(755,root,root) /usr/X11R6/bin/xmbind
 /usr/X11R6/man/man1/xmbind.1.*
 
 %files devel
-%defattr(644, root, root, 755)
-%doc AUTHORS BUG-REPORTING CREDITS CURRENT_NOTES ChangeLog KNOWN_BUGS NEWS
-%doc NOTES README RELEASE-POLICY TODO
-%doc doc/*.txt doc/*.html doc/www.lesstif.org/{images/*gif,*html}
+%defattr(644,root,root,755)
+%doc {AUTHORS,BUG-REPORTING,CREDITS,CURRENT_NOTES,ChangeLog,KNOWN_BUGS,NEWS}.gz
+%doc {NOTES,README,RELEASE-POLICY,TODO}.gz
+%doc doc/*.txt* doc/*.html doc/www.lesstif.org/{images/*gif,*html}
 
 %docdir /home/httpd/html/Lesstif-%{version}
 %doc /home/httpd/html/Lesstif-%{version}/*
@@ -151,9 +158,18 @@ rm -rf $RPM_BUILD_ROOT
 /usr/X11R6/man/man3/*
 
 %files static
-%attr(644,root,root) /usr/X11R6/lib/lib*.a
+%defattr(644, root, root, 755)
+/usr/X11R6/lib/lib*.a
 
 %changelog
+* Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
+  [0.87.1-3]
+- gzipped docs
+- fixed %%attr
+- added some BuildPrereq
+- recompiled on rpm 3
+- removed Conflicts: glibc <= 2.0.7
+
 * Sat Feb 27 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.87.1-2]
 - added "Conflicts: glibc <= 2.0.7" for preven installing with proper
