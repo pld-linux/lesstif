@@ -10,3 +10,21 @@
  
  noinst_HEADERS =
  
+--- lesstif-0.93.95/configure.in.orig	2004-08-07 16:52:47.284784000 +0200
++++ lesstif-0.93.95/configure.in	2004-08-07 16:57:28.587019608 +0200
+@@ -39,6 +39,7 @@
+ dnl
+ 
+ AC_INIT(lesstif, 0.93.95)
++AC_CONFIG_AUX_DIR(.)
+ AC_CONFIG_SRCDIR(lib/Xm/Vendor.c)
+ AM_INIT_AUTOMAKE
+ LIBTOOL_VERSION=0:93:0
+@@ -47,7 +48,6 @@
+ dnl Use no version older than Autoconf 2.50
+ dnl
+ AC_PREREQ(2.50)
+-AC_CONFIG_AUX_DIR(.)
+ 
+ dnl For cross-compiling?!
+ dnl This macro also hides all kinds of stuff we'd otherwise have to add in the

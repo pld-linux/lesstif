@@ -1,99 +1,99 @@
---- lesstif-0.93.94/lib/Xm/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
-+++ lesstif-0.93.94/lib/Xm/Makefile.am	2004-04-03 23:36:06.372240612 +0200
+--- lesstif-0.93.95/lib/Xm/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
++++ lesstif-0.93.95/lib/Xm/Makefile.am	2004-04-03 23:36:06.372240612 +0200
 @@ -30,7 +30,6 @@
  endif
  
- libXm_la_LDFLAGS=	-version-info 1:2
+ libXm_la_LDFLAGS=	-version-info 1:2 -no-undefined
 -libdir = $(exec_prefix)/lib
  
  if Version_1_2
  
---- lesstif-0.93.94/lib/Mrm/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
-+++ lesstif-0.93.94/lib/Mrm/Makefile.am	2004-04-03 23:35:35.723596411 +0200
+--- lesstif-0.93.95/lib/Mrm/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
++++ lesstif-0.93.95/lib/Mrm/Makefile.am	2004-04-03 23:35:35.723596411 +0200
 @@ -4,7 +4,6 @@
  MAINTAINERCLEANFILES=Makefile.in
  
- libMrm_la_LDFLAGS=	-version-info 1:2
+ libMrm_la_LDFLAGS=	-version-info 1:2 -no-undefined
 -libdir = $(exec_prefix)/lib
  
  libMrm_la_SOURCES=	Mrm.c lookup.c misc.c \
  			Mrm.h lookup.h misc.h uil.h
---- lesstif-0.93.94/lib/Uil/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
-+++ lesstif-0.93.94/lib/Uil/Makefile.am	2004-04-03 23:35:51.858723938 +0200
+--- lesstif-0.93.95/lib/Uil/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
++++ lesstif-0.93.95/lib/Uil/Makefile.am	2004-04-03 23:35:51.858723938 +0200
 @@ -4,7 +4,6 @@
  MAINTAINERCLEANFILES=Makefile.in
  
- libUil_la_LDFLAGS=	-version-info 1:2
+ libUil_la_LDFLAGS=	-version-info 1:2 -no-undefined
 -libdir = $(exec_prefix)/lib
  
  libUil_la_SOURCES=	Uil.c  UilData.c  uillex.c  uilparse.c  uilsym.c
  
---- lesstif-0.93.94/lib/Xm-2.0/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
-+++ lesstif-0.93.94/lib/Xm-2.0/Makefile.am	2004-04-03 23:35:55.251909558 +0200
+--- lesstif-0.93.95/lib/Xm-2.0/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
++++ lesstif-0.93.95/lib/Xm-2.0/Makefile.am	2004-04-03 23:35:55.251909558 +0200
 @@ -4,7 +4,6 @@
  MAINTAINERCLEANFILES=Makefile.in
  
- libXm_la_LDFLAGS=	-version-info 2:0
+ libXm_la_LDFLAGS=	-version-info 2:0 -no-undefined
 -libdir = $(exec_prefix)/lib
  
  #
  # Sources in this directory
---- lesstif-0.93.94/lib/Mrm-2.0/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
-+++ lesstif-0.93.94/lib/Mrm-2.0/Makefile.am	2004-04-03 23:35:16.196282946 +0200
+--- lesstif-0.93.95/lib/Mrm-2.0/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
++++ lesstif-0.93.95/lib/Mrm-2.0/Makefile.am	2004-04-03 23:35:16.196282946 +0200
 @@ -4,7 +4,6 @@
  MAINTAINERCLEANFILES=Makefile.in
  
- libMrm_la_LDFLAGS= -version-info 2:0
+ libMrm_la_LDFLAGS= -version-info 2:0 -no-undefined
 -libdir = $(exec_prefix)/lib
  
  #
  # Sources in this directory
---- lesstif-0.93.94/lib/Uil-2.0/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
-+++ lesstif-0.93.94/lib/Uil-2.0/Makefile.am	2004-04-03 23:35:40.373480432 +0200
+--- lesstif-0.93.95/lib/Uil-2.0/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
++++ lesstif-0.93.95/lib/Uil-2.0/Makefile.am	2004-04-03 23:35:40.373480432 +0200
 @@ -4,7 +4,6 @@
  MAINTAINERCLEANFILES=Makefile.in
  
- libUil_la_LDFLAGS= -version-info 2:0
+ libUil_la_LDFLAGS= -version-info 2:0 -no-undefined
 -libdir = $(exec_prefix)/lib
  
  #
  # Sources in this directory
---- lesstif-0.93.94/lib/Xm-2.1/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
-+++ lesstif-0.93.94/lib/Xm-2.1/Makefile.am	2004-04-03 23:35:58.370161162 +0200
+--- lesstif-0.93.95/lib/Xm-2.1/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
++++ lesstif-0.93.95/lib/Xm-2.1/Makefile.am	2004-04-03 23:35:58.370161162 +0200
 @@ -3,7 +3,6 @@
  #
  MAINTAINERCLEANFILES=Makefile.in
  
 -libdir = $(exec_prefix)/lib
- libXm_la_LDFLAGS=	-version-info 2:1  $(X_LIBS) 
+ libXm_la_LDFLAGS=	-version-info 2:1  $(X_LIBS)  -no-undefined
  
  #
---- lesstif-0.93.94/lib/Mrm-2.1/Makefile.am.orig	2001-09-06 15:42:57.000000000 +0200
-+++ lesstif-0.93.94/lib/Mrm-2.1/Makefile.am	2004-04-03 23:35:29.983973922 +0200
+--- lesstif-0.93.95/lib/Mrm-2.1/Makefile.am.orig	2001-09-06 15:42:57.000000000 +0200
++++ lesstif-0.93.95/lib/Mrm-2.1/Makefile.am	2004-04-03 23:35:29.983973922 +0200
 @@ -4,7 +4,6 @@
  MAINTAINERCLEANFILES=Makefile.in
  
- libMrm_la_LDFLAGS= -version-info 2:1
+ libMrm_la_LDFLAGS= -version-info 2:1 -no-undefined
 -libdir = $(exec_prefix)/lib
  
  #
  # Sources in this directory
---- lesstif-0.93.94/lib/Uil-2.1/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
-+++ lesstif-0.93.94/lib/Uil-2.1/Makefile.am	2004-04-03 23:35:46.167089951 +0200
+--- lesstif-0.93.95/lib/Uil-2.1/Makefile.am.orig	2004-04-03 23:10:51.000000000 +0200
++++ lesstif-0.93.95/lib/Uil-2.1/Makefile.am	2004-04-03 23:35:46.167089951 +0200
 @@ -5,7 +5,6 @@
  MAINTAINERCLEANFILES=Makefile.in
  
- libUil_la_LDFLAGS= -version-info 2:1
+ libUil_la_LDFLAGS= -version-info 2:1 -no-undefined
 -libdir = $(exec_prefix)/lib
  
  #
  # Sources in this directory
---- lesstif-0.93.94/lib/Dt/Makefile.am.orig	2003-03-29 13:25:36.000000000 +0100
-+++ lesstif-0.93.94/lib/Dt/Makefile.am	2004-04-03 23:35:07.494371371 +0200
+--- lesstif-0.93.95/lib/Dt/Makefile.am.orig	2003-03-29 13:25:36.000000000 +0100
++++ lesstif-0.93.95/lib/Dt/Makefile.am	2004-04-03 23:35:07.494371371 +0200
 @@ -5,7 +5,6 @@
  MAINTAINERCLEANFILES=Makefile.in
  
- libDtPrint_la_LDFLAGS=	-version-info 1:0
+ libDtPrint_la_LDFLAGS=	-version-info 1:0 -no-undefined
 -libdir = $(exec_prefix)/lib
  
  if BuildLibDtPrint

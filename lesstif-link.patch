@@ -79,20 +79,9 @@
  
  #if Have_Libxp
  #libXm_la_LIBADD = -lXt $(X_PRE_LIBS) -lXp -lXext -lX11 \
---- lesstif-0.93.94/lib/Uil-2.1/Makefile.am.orig	2001-09-06 15:42:57.000000000 +0200
-+++ lesstif-0.93.94/lib/Uil-2.1/Makefile.am	2003-12-29 17:43:33.330469856 +0100
-@@ -43,7 +43,7 @@
- 
- lib_LTLIBRARIES= libUil.la
- 
--#libUil_la_LIBADD = $(X_LIBS) -lXt
-+libUil_la_LIBADD = $(X_LIBS) -lXt
- 
- libUil_la_SOURCES= ${SRCS_1_2:%=../Uil/%} ${SRCS_2_0:%=../Uil-2.0/%}  ${SRCS_2_1}
- 
---- lesstif-0.93.94/configure.in.orig	2003-11-27 20:19:19.000000000 +0100
-+++ lesstif-0.93.94/configure.in	2003-12-29 18:35:38.403386560 +0100
-@@ -563,7 +563,12 @@
+--- lesstif-0.93.95/configure.in.orig	2004-08-06 12:10:23.000000000 +0200
++++ lesstif-0.93.95/configure.in	2004-08-07 16:28:41.694547168 +0200
+@@ -466,7 +466,12 @@
  dnl
  dnl Experimental ! Keith Packard's Xft
  dnl
@@ -102,6 +91,6 @@
 +XFT_LIBS="$LIBS"
 +LIBS="$prexft_save_LIBS"
 +AC_SUBST(XFT_LIBS)
- dnl
  
  dnl
+ dnl Now ensure that all required variables get substituted!
