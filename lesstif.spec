@@ -160,7 +160,6 @@ Xlt static library.
 %build
 autoconf
 automake
-LDFLAGS="-s"; export LDFLAGS
 %configure \
 	--enable-shared \
 	--enable-static \
@@ -206,15 +205,12 @@ install %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/mwm/system.mwmrc
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
 
-gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
-	clients/Motif-1.2/mwm/README \
+gzip -9nf clients/Motif-1.2/mwm/README \
 	AUTHORS BUG-REPORTING CREDITS CURRENT_NOTES ChangeLog \
 	KNOWN_BUGS NEWS NOTES README RELEASE-POLICY TODO \
 	doc/*.txt \
 	lib/Xbae/{AUTHORS,COPYING,FAQ,NEWS,README} \
 	lib/Xlt/{AUTHORS,NEWS,README}
-
-strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
