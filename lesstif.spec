@@ -1,9 +1,11 @@
 %define		motif_ver		1.2
 
 Summary:	LessTif - source compatible library with OSF/Motif %{motif_ver}
+Summary(es):	Clon de la caja de herramientas Motif
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{motif_ver}
+Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
-Version:	0.93.12
+Version:	0.93.14
 Release:	1
 License:	LGPL
 Group:		X11/Libraries
@@ -42,16 +44,22 @@ BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 %define		_wmpropsdir	%{_datadir}/wm-properties
 
 %description
-Lesstif is an API compatible clone of the Motif %{motif_ver} toolkit. Currently
-Lesstif is partially implemented with most of the API in place. Saying
-this a lot of the internal functionality is still missing. The primary
-objectives have been to develop the widget code of the Lesstif
-Toolkit.
+Lesstif is an API compatible clone of the Motif %{motif_ver} toolkit.
+Currently Lesstif is partially implemented with most of the API in
+place. Saying this a lot of the internal functionality is still
+missing. The primary objectives have been to develop the widget code
+of the Lesstif Toolkit.
+
+%description -l es
+Clon de la caja de herramientas Motif
 
 %description -l pl
-Lesstif jest bibliotek± kompatybiln± z API Motif %{motif_ver}. Aktualnie
-implementacja jest czê¶ciowa, wiêkszo¶æ API istnieje, ale spora czê¶æ
-funkcjonalno¶ci wewnêtrznej jest nie dokoñczona.
+Lesstif jest bibliotek± kompatybiln± z API Motif %{motif_ver}.
+Aktualnie implementacja jest czê¶ciowa, wiêkszo¶æ API istnieje, ale
+spora czê¶æ funkcjonalno¶ci wewnêtrznej jest nie dokoñczona.
+
+%description -l pt_BR
+O Lesstif é um clone do Motif, com a API compatível.
 
 %package mwm
 Summary:	Lesstif (Motif) window manager clone based on fvwm
@@ -70,9 +78,17 @@ A BETA release of mwm. It is derived from fvwm, with a new parser that
 understands mwmrc syntax, and a general understanding of Mwm
 resources.
 
+%description -l es mwm
+MWM es un administrador de ventanas que adhiere ampliamente a la
+especificación Motif.
+
 %description mwm -l pl
 Wersja BETA mwm. Wywodzi siê z fvwm, a z nowym parserem rozumiej±cym
 sk³adniê mwmrc i zasoby Mwm.
+
+%description -l pt_BR mwm
+O MWM é um gerenciador de janelas que adere largamente à especificação
+Motif.
 
 %package clients
 Summary:	Lesstif clients
@@ -87,13 +103,20 @@ Obsoletes:	openmotif-clients
 %description clients
 Uil and xmbind.
 
+%description -l es clients
+Clientes de lesstif.
+
 %description clients -l pl
 Uil i xmbind.
 
+%description -l pt_BR clients
+lesstiff: Uil e xmbind.
+
 %package devel
 Summary:	Header files for Lesstif/Motif %{motif_ver} development
+Summary(es):	Bibliotecas y archivos de inclusión para desarrollo del lesstif
 Summary(pl):	Pliki nag³ówkowe do API Lesstif/Motif %{motif_ver}
-License:	LGPL
+Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimentos com o lesstif
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
 Group(es):	X11/Desarrollo/Bibliotecas
@@ -110,14 +133,23 @@ Obsoletes:	openmotif-devel
 This package contains the lesstif header files required to develop
 Motif %{motif_ver} based applications.
 
+%description -l es devel
+Bibliotecas y archivos de inclusión que se requieren para desarrollar
+aplicaciones basadas en lesstif/motif-%{motif_ver}.
+
 %description devel -l pl
 Pakiet zawiera pliki nag³ówkowe potrzebne do kompilacji aplikacji
 opartych o Motif %{motif_ver}.
 
+%description -l pt_BR devel
+Bibliotecas e arquivos de inclusão requeridas para desenvolver
+aplicações baseadas no lesstif/motif-%{motif_ver}.
+
 %package static
 Summary:	Static Lesstif library
+Summary(es):	Bibliotecas para lesstif en versión estática
 Summary(pl):	Biblioteki statyczne Lesstifa
-License:	LGPL
+Summary(pt_BR):	Bibliotecas para o lesstif em versão estática
 Group:		X11/Development/Libraries
 Group(de):	X11/Entwicklung/Libraries
 Group(es):	X11/Desarrollo/Bibliotecas
@@ -133,8 +165,14 @@ Obsoletes:	openmotif-static
 %description static
 This package contains the lesstif static libraries.
 
+%description -l es static
+Bibliotecas para lesstif en versión estática.
+
 %description static -l pl
 Biblioteki statyczne Lesstifa.
+
+%description -l pt_BR static
+Bibliotecas para o lesstif em versão estática.
 
 %prep
 %setup -q
@@ -162,15 +200,15 @@ automake -a -c)
 	--disable-build-21 \
 	--enable-build-%(echo %{motif_ver} | sed s/\\.//)
 
-%{__make} mwmddir=/etc/X11/mwm
+%{__make} mwmddir=%{_sysconfdir}/X11/mwm
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{/etc/{sysconfig/wmstyle,X11},%{_aclocaldir},%{_wmpropsdir}}
+install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig/wmstyle,X11},%{_aclocaldir},%{_wmpropsdir}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	mwmddir=/etc/X11/mwm \
+mwmddir=%{_sysconfdir}/X11/mwm \
 	htmldir=/htmldoc
 
 mv -f $RPM_BUILD_ROOT/htmldoc .
@@ -194,9 +232,9 @@ gzip -9nf clients/Motif-%{motif_ver}/mwm/README \
 %postun -p /sbin/ldconfig
 
 %post mwm
-if [ -L /etc/X11/mwm ]; then
-	rm -rf /etc/X11/mwm
-	rm -rf /usr/X11R6/lib/X11/mwm/*
+if [ -L %{_sysconfdir}/X11/mwm ]; then
+	rm -rf %{_sysconfdir}/X11/mwm
+	rm -rf %{_libdir}/X11/mwm/*
 fi
 
 %clean
@@ -211,9 +249,9 @@ rm -rf $RPM_BUILD_ROOT
 %files mwm
 %defattr(644,root,root,755)
 %doc clients/Motif-%{motif_ver}/mwm/README*
-%dir /etc/X11/mwm
+%dir %{_sysconfdir}/X11/mwm
 %{_wmpropsdir}/Mwm.desktop
-%config /etc/X11/mwm/*
+%config %{_sysconfdir}/X11/mwm/*
 %attr(755,root,root) /etc/sysconfig/wmstyle/*.sh
 /etc/sysconfig/wmstyle/*.names
 %attr(755,root,root) %{_bindir}/mwm
