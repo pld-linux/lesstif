@@ -1,7 +1,7 @@
 Summary:	LessTif - source compatible library with OSF/Motif® 1.2
 Name:		lesstif
-Version:	0.89.0
-Release:	3
+Version:	0.89.4
+Release:	1
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -109,10 +109,42 @@ Requires:	Xbae-devel = %{version}
 %description -n Xbae-static
 XbaeMatrix static library.
 
+%package -n Xlt
+Summary:	The LessTif extension library
+Copyright:	LGPL
+Group:		X11/Libraries
+Group(pl):	X11/Biblioteki
+Requires:	%{name} = %{version}
+
+%description -n Xlt
+The LessTif extension library. This consists of several widgets and
+convience functions to make LessTif, or if you must Motif, programming more
+enjoyable.
+
+%package -n Xlt-devel
+Summary:	Xlt header files and development documentation
+Copyright:	LGPL
+Group:		X11/Development/Libraries
+Group(pl):	X11/Programowanie/Biblioteki
+Requires:	Xlt = %{version}
+
+%description -n Xlt-devel
+Xlt header files and development documentation.
+
+%package -n Xlt-static
+Summary:	Xlt static library
+Copyright:	LGPL
+Group:		X11/Development/Libraries
+Group(pl):	X11/Programowanie/Biblioteki
+Requires:	Xlt-devel = %{version}
+
+%description -n Xlt-static
+Xlt static library.
+
 %prep
 %setup -q
 #%setup -q -n %{name}-current
-%patch0 -p1
+#%patch0 -p1
 %patch1 -p1
 
 #find . -name CVS -exec rm -rf {} \; 2> /dev/null ||
@@ -132,6 +164,7 @@ LDFLAGS="-s"; export LDFLAGS
 	--enable-build-12 \
 	--enable-default-12 \
 	--enable-build-Xbae \
+	--enable-build-Xlt \
 	--disable-build-20 \
 	--disable-default-20
 
@@ -165,7 +198,8 @@ gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	AUTHORS BUG-REPORTING CREDITS CURRENT_NOTES ChangeLog \
 	KNOWN_BUGS NEWS NOTES README RELEASE-POLICY TODO \
 	doc/*.txt \
-	lib/Xbae/{AUTHORS,COPYING,FAQ,NEWS,README}
+	lib/Xbae/{AUTHORS,COPYING,FAQ,NEWS,README} \
+	lib/Xlt/{AUTHORS,NEWS,README}
 
 strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
@@ -174,6 +208,9 @@ strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so.*.*
 
 %post   -n Xbae -p /sbin/ldconfig
 %postun -n Xbae -p /sbin/ldconfig
+
+%post   -n Xlt -p /sbin/ldconfig
+%postun -n Xlt -p /sbin/ldconfig
 
 %post mwm
 if [ -L /etc/X11/mwm ]; then
@@ -240,65 +277,7 @@ rm -rf $RPM_BUILD_ROOT
 %{_mandir}/man3/UnNamedObj.3*
 %{_mandir}/man3/VendorShell.3*
 %{_mandir}/man3/WmShell.3*
-%{_mandir}/man3/XmArrowButton.3*
-%{_mandir}/man3/XmArrowButtonGadget.3*
-%{_mandir}/man3/XmBulletinBoard.3*
-%{_mandir}/man3/XmCascadeButton.3*
-%{_mandir}/man3/XmCascadeButtonGadget.3*
-%{_mandir}/man3/XmClipboard.3*
-%{_mandir}/man3/XmComboBox.3*
-%{_mandir}/man3/XmCommand.3*
-%{_mandir}/man3/XmDesktop.3*
-%{_mandir}/man3/XmDialogShell.3*
-%{_mandir}/man3/XmDialogShellExt.3*
-%{_mandir}/man3/XmDisplay.3*
-%{_mandir}/man3/XmDragContext.3*
-%{_mandir}/man3/XmDragIcon.3*
-%{_mandir}/man3/XmDragOverShell.3*
-%{_mandir}/man3/XmDrawingArea.3*
-%{_mandir}/man3/XmDrawnButton.3*
-%{_mandir}/man3/XmDropSiteManager.3*
-%{_mandir}/man3/XmDropTransfer.3*
-%{_mandir}/man3/XmFileSelectionBox.3*
-%{_mandir}/man3/XmForm.3*
-%{_mandir}/man3/XmFrame.3*
-%{_mandir}/man3/XmGadget.3*
-%{_mandir}/man3/XmGrabShell.3*
-%{_mandir}/man3/XmIconGadget.3*
-%{_mandir}/man3/XmLabel.3*
-%{_mandir}/man3/XmLabelGadget.3*
-%{_mandir}/man3/XmList.3*
-%{_mandir}/man3/XmMainWindow.3*
-%{_mandir}/man3/XmManager.3*
-%{_mandir}/man3/XmMenuShell.3*
-%{_mandir}/man3/XmMessageBox.3*
-%{_mandir}/man3/XmNotebook.3*
-%{_mandir}/man3/XmPanedWindow.3*
-%{_mandir}/man3/XmPrimitive.3*
-%{_mandir}/man3/XmProtocol.3*
-%{_mandir}/man3/XmPushButton.3*
-%{_mandir}/man3/XmPushButtonGadget.3*
-%{_mandir}/man3/XmRowColumn.3*
-%{_mandir}/man3/XmSash.3*
-%{_mandir}/man3/XmScale.3*
-%{_mandir}/man3/XmScreen.3*
-%{_mandir}/man3/XmScrollBar.3*
-%{_mandir}/man3/XmScrolledWindow.3*
-%{_mandir}/man3/XmSelectionBox.3*
-%{_mandir}/man3/XmSeparator.3*
-%{_mandir}/man3/XmSeparatorGadget.3*
-%{_mandir}/man3/XmSpinBox.3*
-%{_mandir}/man3/XmTearOffButton.3*
-%{_mandir}/man3/XmText.3*
-%{_mandir}/man3/XmTextField.3*
-%{_mandir}/man3/XmToggleButton.3*
-%{_mandir}/man3/XmToggleButtonGadget.3*
-%{_mandir}/man3/XmVendorShell.3*
-%{_mandir}/man3/XmWorld.3*
-%{_mandir}/man3/XtConfigureObject.3*
-%{_mandir}/man3/XtDestroyWidget.3*
-%{_mandir}/man3/XtManageChild.3*
-%{_mandir}/man3/XtUnmanageChild.3*
+%{_mandir}/man3/Xm*
 
 %files static
 %defattr(644,root,root,755)
@@ -315,10 +294,21 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libXbae.la
 %{_includedir}/Xbae
 /usr/share/aclocal/ac_find_xbae.m4
-
-%{_mandir}/man3/XbaeCaption.3*
-%{_mandir}/man3/XbaeInput.3*
-%{_mandir}/man3/XbaeMatrix.3*
+%{_mandir}/man3/Xbae*
 
 %files -n Xbae-static
 %attr(644,root,root) %{_libdir}/libXbae.a
+
+%files -n Xlt
+%attr(755,root,root) %{_libdir}/libXlt.so.*.*
+
+%files -n Xlt-devel
+%defattr(644,root,root,755)
+%doc lib/Xlt/{AUTHORS,NEWS,README}.gz
+%attr(755,root,root) %{_libdir}/libXlt.so
+%attr(755,root,root) %{_libdir}/libXlt.la
+%{_includedir}/Xlt
+%{_mandir}/man3/Xlt*
+
+%files -n Xlt-static
+%attr(644,root,root) %{_libdir}/libXlt.a
