@@ -77,7 +77,7 @@ License:	GPL
 Group:		X11/Window Managers
 Requires:	%{name} = %{version}-%{release}
 Requires:	wmconfig >= 0.9.9-5
-Requires:	xinitrc >= 3.0
+Requires:	xinitrc-ng
 Obsoletes:	openmotif-mwm
 
 %description mwm
