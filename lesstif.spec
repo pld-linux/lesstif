@@ -175,7 +175,7 @@ rm -rf $RPM_BUILD_ROOT
 - removed lesstif-M*  subpackages,
 - rearanged Copyright filds,
 - fiew simplification in %files,
-- added striping /usr/X11R6/bin/{mwm,uil,xmbind},
+- added stripping /usr/X11R6/bin/{mwm,uil,xmbind},
 - added package icon (lesstif-realsmall.gif),
 - removwd Imake config files (files from XFree86-devel have similar
   functionality),
@@ -217,7 +217,7 @@ rm -rf $RPM_BUILD_ROOT
 - added package lesstif-M12 simple Motif 1.2 wrapper,
 - simplified %install section,
 - added %attr macros in %files sections,
-- added striping shared libraries,
+- added stripping shared libraries,
 - added URL field,
 - added Lessdox - a html development documentation to lesstif-devel,
 - added lesstif-0.80public-nopedantic.patch, this allow compile lesstif on
