@@ -9,13 +9,6 @@ Version:	0.93.18
 Release:	1
 License:	LGPL
 Group:		X11/Libraries
-Group(de):	X11/Libraries
-Group(es):	X11/Bibliotecas
-Group(fr):	X11/Librairies
-Group(pl):	X11/Biblioteki
-Group(pt_BR):	X11/Bibliotecas
-Group(ru):	X11/âÉÂÌÉÏÔÅËÉ
-Group(uk):	X11/â¦ÂÌ¦ÏÔÅËÉ
 Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.bz2
 Source1:	Mwm.desktop
 Source2:	mwmrc
@@ -66,10 +59,6 @@ Summary:	Lesstif (Motif) window manager clone based on fvwm
 Summary(pl):	Mened¿er okien bazuj±cy na fvwm, ale korzystaj±cy z Lesstifa (Motifa)
 License:	GPL
 Group:		X11/Window Managers
-Group(de):	X11/Fenstermanager
-Group(es):	X11/Administraadores De Ventanas
-Group(fr):	X11/Gestionnaires De Fenêtres
-Group(pl):	X11/Zarz±dcy Okien
 Requires:	%{name} = %{version}
 Requires:	wmconfig >= 0.9.9-5
 Requires:	xinitrc >= 3.0
@@ -97,11 +86,6 @@ Summary:	Lesstif clients
 Summary(pl):	Programy klienckie do Lesstifa
 License:	GPL
 Group:		X11/Applications
-Group(de):	X11/Applikationen
-Group(es):	X11/Aplicaciones
-Group(pl):	X11/Aplikacje
-Group(pt_BR):	X11/Aplicações
-Group(pt):	X11/Aplicações
 Requires:	%{name} = %{version}
 Obsoletes:	openmotif-clients
 
@@ -123,13 +107,6 @@ Summary(es):	Bibliotecas y archivos de inclusión para desarrollo del lesstif
 Summary(pl):	Pliki nag³ówkowe do API Lesstif/Motif %{motif_ver}
 Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimentos com o lesstif
 Group:		X11/Development/Libraries
-Group(de):	X11/Entwicklung/Libraries
-Group(es):	X11/Desarrollo/Bibliotecas
-Group(fr):	X11/Development/Librairies
-Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(ru):	X11/òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
-Group(uk):	X11/òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name} = %{version}
 Provides:	motif-devel = %{motif_ver}
 Obsoletes:	openmotif-devel
@@ -156,13 +133,6 @@ Summary(es):	Bibliotecas para lesstif en versión estática
 Summary(pl):	Biblioteki statyczne Lesstifa
 Summary(pt_BR):	Bibliotecas para o lesstif em versão estática
 Group:		X11/Development/Libraries
-Group(de):	X11/Entwicklung/Libraries
-Group(es):	X11/Desarrollo/Bibliotecas
-Group(fr):	X11/Development/Librairies
-Group(pl):	X11/Programowanie/Biblioteki
-Group(pt_BR):	X11/Desenvolvimento/Bibliotecas
-Group(ru):	X11/òÁÚÒÁÂÏÔËÁ/âÉÂÌÉÏÔÅËÉ
-Group(uk):	X11/òÏÚÒÏÂËÁ/â¦ÂÌ¦ÏÔÅËÉ
 Requires:	%{name}-devel = %{version}
 Provides:	motif-static
 Obsoletes:	openmotif-static
