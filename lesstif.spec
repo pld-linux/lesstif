@@ -67,6 +67,8 @@ Summary(pl):	Mened¿er okien bazuj±cy na fvwm, ale korzystaj±cy z Lesstifa (Motif
 License:	GPL
 Group:		X11/Window Managers
 Group(de):	X11/Fenstermanager
+Group(es):	X11/Administraadores De Ventanas
+Group(fr):	X11/Gestionnaires De Fenêtres
 Group(pl):	X11/Zarz±dcy Okien
 Requires:	%{name} = %{version}
 Requires:	wmconfig >= 0.9.9-5
