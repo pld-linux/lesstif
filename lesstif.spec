@@ -37,7 +37,7 @@ Obsoletes:	openmotif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_wmpropsdir	/usr/share/wm-properties
-%define		addir		/usr/X11R6/lib/X11/app-defaults
+%define		_appdefsdir	/usr/X11R6/lib/X11/app-defaults
 
 %description
 Lesstif is an API compatible clone of the Motif %{motif_ver} toolkit.
@@ -208,7 +208,7 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig/wmstyle,X11} \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_datadir}/xsessions,%{_wmpropsdir}}
 
 # for proper app-defaults path
-install -d $RPM_BUILD_ROOT{%{addir},%{_libdir}}
+install -d $RPM_BUILD_ROOT{%{_appdefsdir},%{_libdir}}
 ln -sf ../X11R6/lib/X11 $RPM_BUILD_ROOT%{_libdir}/X11
 
 %{__make} install \
@@ -259,7 +259,7 @@ fi
 
 %{_datadir}/xsessions/mwm.desktop
 
-%{addir}/*
+%{_appdefsdir}/*
 
 %{_mandir}/man1/mwm.1*
 %{_mandir}/man5/mwmrc.5*
