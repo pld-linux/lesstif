@@ -16,6 +16,7 @@ Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
 Source4:	mwm.wm_style
+Source5:	mwm-xsession.desktop
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-ac.patch
 Icon:		lesstif-realsmall.gif
@@ -204,7 +205,7 @@ cd ..
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig/wmstyle,X11} \
-	$RPM_BUILD_ROOT{%{_aclocaldir},%{_wmpropsdir}}
+	$RPM_BUILD_ROOT{%{_aclocaldir},%{_datadir}/xsessions,%{_wmpropsdir}}
 
 # for proper app-defaults path
 install -d $RPM_BUILD_ROOT{%{addir},%{_libdir}}
@@ -226,6 +227,7 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
+install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/xsessions/mwm.desktop
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -254,6 +256,8 @@ fi
 %attr(755,root,root) /etc/sysconfig/wmstyle/*.sh
 /etc/sysconfig/wmstyle/*.names
 %attr(755,root,root) %{_bindir}/mwm
+
+%{_datadir}/xsessions/mwm.desktop
 
 %{addir}/*
 
