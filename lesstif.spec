@@ -6,12 +6,12 @@ Summary(ja):	lesstif - Motif¸ß´¹¥Ä¡¼¥ë¥­¥Ã¥È
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{motif_ver}
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
-Version:	0.93.46
+Version:	0.93.49
 Release:	1
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
-# Source0-md5:	4744f52dee3749dedbc2210728ce28d2
+# Source0-md5:	f1a75a4c1d3b969494b095e7e1362611
 Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
@@ -26,13 +26,13 @@ BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	libtool
 BuildRequires:	lynx
-Obsoletes:	lesstif-M20
+Provides:	motif = %{motif_ver}
 Obsoletes:	lesstif-M12
+Obsoletes:	lesstif-M20
 %if %(echo %{motif_ver} | sed s/\\.//) >= 20
 # openmotif provides library version 2.1, so there will be conflicts
 Obsoletes:	openmotif
 %endif
-Provides:	motif = %{motif_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_wmpropsdir	/usr/share/wm-properties
@@ -198,11 +198,13 @@ cd ..
 	--disable-build-21 \
 	--enable-build-%(echo %{motif_ver} | sed s/\\.//)
 
-%{__make} mwmddir=%{_sysconfdir}/X11/mwm
+%{__make} \
+	mwmddir=%{_sysconfdir}/X11/mwm
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig/wmstyle,X11},%{_aclocaldir},%{_wmpropsdir}}
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig/wmstyle,X11} \
+	$RPM_BUILD_ROOT{%{_aclocaldir},%{_wmpropsdir}}
 
 # for proper app-defaults path
 install -d $RPM_BUILD_ROOT{%{addir},%{_libdir}}
