@@ -1,16 +1,17 @@
-Summary:     LessTif - source compatible library with OSF/Motif® 1.2
-Name:        lesstif
-Version:     0.87.0
-Release:     1
-#Release:     @DATE@
-Copyright:   LGPL
-Group:       X11/Libraries
-Source0:     ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.gz
-#Source0:     ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-current.tar.gz
-Patch0:      lesstif.optflags.patch
-Icon:        %{name}-realsmall.gif
-BuildRoot:   /tmp/%{name}-%{version}-root
-Obsoletes:   lesstif-M20, lesstif-M12
+Summary:	LessTif - source compatible library with OSF/Motif® 1.2
+Name:		lesstif
+Version:	0.87.9
+Release:	1
+#Release:	@DATE@
+Copyright:	LGPL
+Group:		X11/Libraries
+Group(pl):	X11/Biblioteki
+Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.gz
+#Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-current.tar.gz
+Patch0:		lesstif.optflags.patch
+Icon:		lesstif-realsmall.gif
+BuildRoot:	/tmp/%{name}-%{version}-root
+Obsoletes:	lesstif-M20, lesstif-M12
 
 %description
 Lesstif is an API compatible clone of the Motif 1.2 toolkit.
@@ -20,39 +21,43 @@ primary objectives have been to develop the widget code of the Lesstif
 Toolkit.
 
 %package mwm
-Summary:     Lesstif (Motif) window manager clone based on fvwm
-Group:       X11/Window Managers
-Requires:    %{name} = %{version}
-Copyright:   GPL
+Summary:	Lesstif (Motif) window manager clone based on fvwm
+Copyright:	GPL
+Group:		X11/Window Managers
+Group(pl):	X11/Zarz±dcy Okien
+Requires:	%{name} = %{version}
 
 %description mwm
 A BETA release of mwm.  It is derived from fvwm, with a new parser that
 understands mwmrc syntax, and a general understanding of Mwm resources.
 
-%package   clients
-Summary:     Lesstif clients
-Group:       X11/Applications
-Requires:    %{name} = %{version}
-Copyright:   GPL
+%package clients
+Summary:	Lesstif clients
+Copyright:	GPL
+Group:		X11/Applications
+Group(pl):	X11/Aplikacje
+Requires:	%{name} = %{version}
 
 %description clients
 Uil and xmbind.
 
 %package devel
-Group:       Development/Libraries/X11
-Summary:     Header files for Lesstif/Motif 1.2 development
-Copyright:   LGPL
-Requires:    %{name} = %{version}
+Summary:	Header files for Lesstif/Motif 1.2 development
+Copyright:	LGPL
+Group:		X11/Development/Libraries
+Group(pl):	X11/Programowanie/Libraries
+Requires:	%{name} = %{version}
 
 %description devel
 This package contains the lesstif header files required to develop Motif 1.2
 based applications.
 
 %package static
-Group:       Development/Libraries/X11
-Summary:     Static Lesstif library
-Copyright:   LGPL
-Requires:    %{name}-devel = %{version}
+Summary:	Static Lesstif library
+Copyright:	LGPL
+Group:		X11/Development/Libraries
+Group(pl):	X11/Programowanie/Libraries
+Requires:	%{name}-devel = %{version}
 
 %description static
 This package contains the lesstif static libraries.
@@ -65,7 +70,7 @@ This package contains the lesstif static libraries.
 #find . -name CVS -exec rm -rf {} \; 2> /dev/null ||
 
 %build
-CFLAGS="$RPM_OPT_FLAGS" \
+CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure	--prefix=/usr/X11R6 \
 		--enable-shared \
 		--enable-static \
@@ -92,6 +97,8 @@ ln -sf ../../usr/X11R6/lib/X11/mwm $RPM_BUILD_ROOT/etc/X11/mwm
 
 rm -f doc/INSTALL.html
 
+gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man*/*
+
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
@@ -99,44 +106,59 @@ rm -f doc/INSTALL.html
 rm -rf $RPM_BUILD_ROOT
 
 %files
-%attr(755, root, root)/usr/X11R6/lib/lib*.so.*.*
-%attr(644, root, man) /usr/X11R6/man/man1/lesstif.1
+%attr(755,root,root)/usr/X11R6/lib/lib*.so.*.*
+%attr(644,root,root) /usr/X11R6/man/man1/lesstif.1.*
 
 %files mwm
-%defattr(644, root, root, 755)
+%defattr(644,root,root,755)
 %doc clients/Motif-1.2/mwm/README doc/MWM.txt
 %dir /etc/X11/mwm
 %dir /usr/X11R6/lib/X11/mwm
-%attr(755, root, root) /usr/X11R6/bin/mwm
+%attr(755,root,root) /usr/X11R6/bin/mwm
+
 %config /usr/X11R6/lib/X11/mwm/*
 %config /usr/X11R6/lib/X11/app-defaults/*
-%attr(644, root,  man) /usr/X11R6/man/man1/mwm.1
-%attr(644, root,  man) /usr/X11R6/man/man5/mwmrc.5
+
+/usr/X11R6/man/man1/mwm.1.*
+/usr/X11R6/man/man5/mwmrc.5.*
 
 %files clients
-%attr(644, root, root) %doc doc/UIL.txt
-%attr(755, root, root) /usr/X11R6/bin/uil
-%attr(755, root, root) /usr/X11R6/bin/xmbind
-%attr(644, root,  man) /usr/X11R6/man/man1/xmbind.1
+%attr(644,root,root,755)
+%doc doc/UIL.txt
+%attr(755,root,root) /usr/X11R6/bin/uil
+%attr(755,root,root) /usr/X11R6/bin/xmbind
+/usr/X11R6/man/man1/xmbind.1.*
 
 %files devel
 %defattr(644, root, root, 755)
 %doc AUTHORS BUG-REPORTING CREDITS CURRENT_NOTES ChangeLog KNOWN_BUGS NEWS
 %doc NOTES README RELEASE-POLICY TODO
 %doc doc/*.txt doc/*.html doc/www.lesstif.org/{images/*gif,*html}
-%dir /usr/X11R6/include/Mrm
-%dir /usr/X11R6/include/Xm
-/usr/X11R6/include/Mrm/*
-/usr/X11R6/include/Xm/*
-/usr/X11R6/lib/lib*.so
-%attr(644, root, man) /usr/X11R6/man/man3/*
+
 %docdir /home/httpd/html/Lesstif-%{version}
-/home/httpd/html/Lesstif-%{version}/*
+%doc /home/httpd/html/Lesstif-%{version}/*
+
+%attr(755,root,root) /usr/X11R6/lib/lib*.so
+
+/usr/X11R6/include/Mrm
+/usr/X11R6/include/Xm
+
+/usr/X11R6/man/man3/*
 
 %files static
-%attr(644, root, root) /usr/X11R6/lib/lib*.a
+%attr(644,root,root) /usr/X11R6/lib/lib*.a
 
 %changelog
+* Sat Feb 27 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.87.9-1]
+- simplifications in %files,
+- added %doc for /home/httpd/html/Lesstif-%%{version}/* files,
+- changed permission to 755 on /usr/X11R6/lib/lib*.so,
+- changed Group in static and devel to X11/Development/Libraries,
+- added Group(pl),
+- added gzipping man pages,
+- removed man group from man pages.
+
 * Sun Aug 30 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.86.0]
 - all %doc moved from main package to devel,
