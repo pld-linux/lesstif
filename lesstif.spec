@@ -78,7 +78,7 @@ This package contains the lesstif static libraries.
 %build
 autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
-./configure %{_target} \
+./configure %{_target_platform} \
 	--prefix=%{_prefix} \
 	--enable-shared \
 	--enable-static \
