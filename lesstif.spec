@@ -1,15 +1,15 @@
 Summary:	LessTif - source compatible library with OSF/Motif® 1.2
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif 1.2
 Name:		lesstif
-Version:	0.92.26
+Version:	0.92.32
 Release:	1
 License:	LGPL
 Group:		X11/Libraries
 Group(de):	X11/Libraries
 Group(es):	X11/Bibliotecas
 Group(pl):	X11/Biblioteki
-Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.gz
-#Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-current.tar.gz
+Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.bz2
+#Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-current.tar.bz2
 Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
