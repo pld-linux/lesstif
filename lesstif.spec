@@ -6,7 +6,7 @@ Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.93.18
-Release:	1
+Release:	2
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.bz2
