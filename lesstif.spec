@@ -19,7 +19,8 @@ Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
 Source4:	mwm.wm_style
-Icon:		lesstif-realsmall.gif
+Patch0:		%{name}-am.patch
+Icon:		%{name}-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
@@ -137,12 +138,18 @@ Biblioteki statyczne Lesstifa.
 
 %prep
 %setup -q
+%patch0 -p1
 
 %build
-#aclocal
-#autoconf
-#automake -a -c
-%configure2_13 \
+aclocal
+autoconf
+automake -a -c
+(cd test
+aclocal
+autoconf
+automake -a -c)
+
+%configure \
 	--enable-shared \
 	--enable-static \
 	--enable-production \
