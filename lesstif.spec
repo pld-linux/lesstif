@@ -203,11 +203,6 @@ install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
 
-gzip -9nf clients/Motif-%{motif_ver}/mwm/README \
-	AUTHORS BUG-REPORTING CREDITS \
-	ChangeLog NEWS README ReleaseNotes.txt \
-	doc/*.txt
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
@@ -250,7 +245,7 @@ fi
 
 %files devel
 %defattr(644,root,root,755)
-%doc {AUTHORS,BUG-REPORTING,CREDITS,ChangeLog,NEWS,README,ReleaseNotes.txt}.gz
+%doc AUTHORS BUG-REPORTING CREDITS ChangeLog NEWS README ReleaseNotes.txt
 %doc doc/*.txt* doc/*.html doc/www.lesstif.org/{images/*png,*html} htmldoc/*
 
 %attr(755,root,root) %{_libdir}/libMrm.so
