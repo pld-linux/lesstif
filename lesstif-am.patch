@@ -1,0 +1,10 @@
+--- lesstif-0.93.9/configure.in	Sun Sep 23 17:55:15 2001
++++ lesstif-0.93.9/configure.in.new	Sun Sep 23 17:52:48 2001
+@@ -7,6 +7,7 @@
+ 
+ dnl First some auto*-related stuff
+ AC_INIT(include/LTmisc.h)
++AM_INIT_AUTOMAKE([lesstif], [0.93.9])
+ AC_PREREQ(2.13)
+ AC_CONFIG_AUX_DIR(.)
+ 
