@@ -15,7 +15,6 @@ Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
 Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
-Source4:	mwm.wm_style
 Source5:	mwm-xsession.desktop
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-link.patch
@@ -238,7 +237,6 @@ install scripts/autoconf/ac_find_motif.m4 $RPM_BUILD_ROOT%{_aclocaldir}
 install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
-install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
 install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/xsessions/mwm.desktop
 
 %clean
@@ -270,7 +268,6 @@ fi
 %{_wmpropsdir}/Mwm.desktop
 %config %{_sysconfdir}/X11/mwm/*
 %attr(755,root,root) /etc/sysconfig/wmstyle/*.sh
-/etc/sysconfig/wmstyle/*.names
 %attr(755,root,root) %{_bindir}/mwm
 
 %{_datadir}/xsessions/mwm.desktop
