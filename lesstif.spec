@@ -19,6 +19,7 @@ BuildRequires:	man2html
 BuildRequires:	lynx
 Obsoletes:	lesstif-M20
 Obsoletes:	lesstif-M12
+Provides:	motif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
