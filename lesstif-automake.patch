@@ -186,3 +186,18 @@ diff -Nru lesstif-0.89.0/doc/lessdox/widgets/Makefile.am lesstif-0.89.0.new/doc/
 -#
 -install-data-hook:
 -	if [ ! -h $(DESTDIR)$(prefix)/LessTif/doc/Lessdox ]; then mkdir -p $(DESTDIR)$(prefix)/LessTif/doc && cd $(DESTDIR)$(prefix)/LessTif/doc && $(LN_S) html Lessdox; fi
+diff -Nru lesstif-0.89.0/lib/Makefile.am lesstif-0.89.0.new/lib/Makefile.am
+--- lesstif-0.89.0/lib/Makefile.am	Sun Oct 17 22:51:54 1999
++++ lesstif-0.89.0.new/lib/Makefile.am	Sun Oct 17 22:52:21 1999
+@@ -2,9 +2,8 @@
+ # $Header$
+ #
+ MAINTAINERCLEANFILES=Makefile.in
++if Version_1_2
+ SUBDIRS=	config \
+ 		Xm Mrm Uil \
+-		Xm-2.0 Mrm-2.0 Uil-2.0 \
+-		Xm-2.1 Mrm-2.1 \
+-		Xm-CDE Mrm-CDE \
+ 		@BuildXltDir@ @BuildXbaeDir@
++endif
