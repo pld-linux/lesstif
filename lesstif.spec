@@ -1,13 +1,14 @@
 Summary:	LessTif - source compatible library with OSF/Motif® 1.2
 Name:		lesstif
-Version:	0.87.1
-Release:	3
+Version:	0.88.1
+Release:	1
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
 Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.gz
 #Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-current.tar.gz
 Patch0:		lesstif.optflags.patch
+Patch1:		lesstif-mwmrc_path.patch
 Icon:		lesstif-realsmall.gif
 BuildPrereq:	XFree86-devel
 BuildPrereq:	man2html
@@ -15,6 +16,7 @@ BuildRoot:	/tmp/%{name}-%{version}-root
 Obsoletes:	lesstif-M20
 Obsoletes:	lesstif-M12
 
+%define _prefix /usr/X11R6
 
 %description
 Lesstif is an API compatible clone of the Motif 1.2 toolkit.
@@ -69,18 +71,24 @@ This package contains the lesstif static libraries.
 %setup -q
 #%setup -q -n %{name}-current
 %patch0 -p1
+%patch1 -p1
 
 #find . -name CVS -exec rm -rf {} \; 2> /dev/null ||
 
 %build
+autoconf
 CFLAGS="$RPM_OPT_FLAGS" LDFLAGS="-s" \
 ./configure %{_target} \
-	--prefix=/usr/X11R6 \
+	--prefix=%{_prefix} \
 	--enable-shared \
 	--enable-static \
 	--enable-production \
 	--disable-debug \
+	--disable-scrollbar-verbose \
+	--with-editres \
+	--with-xdnd \
 	--enable-build-12 \
+	--enable-default-12 \
 	--disable-build-20 \
 	--disable-default-20
 make
@@ -89,26 +97,28 @@ make
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/etc/X11
 make install \
-	prefix=$RPM_BUILD_ROOT/usr/X11R6 \
-	mrmdir=$RPM_BUILD_ROOT/usr/X11R6/include/Mrm \
-	xmdir=$RPM_BUILD_ROOT/usr/X11R6/include/Xm \
-	man1dir=$RPM_BUILD_ROOT/usr/X11R6/man/man1 \
-	man3dir=$RPM_BUILD_ROOT/usr/X11R6/man/man3 \
-	man5dir=$RPM_BUILD_ROOT/usr/X11R6/man/man5 \
-	htmldir=$RPM_BUILD_ROOT/home/httpd/html/Lesstif-%{version}
+	DESTDIR=$RPM_BUILD_ROOT \
+	mwmddir=/etc/X11/mwm \
+	man1dir=%{_mandir}/man1 \
+	man3dir=%{_mandir}/man3 \
+	man5dir=%{_mandir}/man5 \
+	htmldir=/home/httpd/html/Lesstif-%{version}
 
-strip $RPM_BUILD_ROOT/usr/X11R6/{lib/lib*.so,bin/{mwm,uil,xmbind}}
+# correction locations some files files
+rm -rf $RPM_BUILD_ROOT{%{_includedir}/{Mrm,Xm},%{_libdir}/lib*}
 
-# mwm
-ln -sf ../../usr/X11R6/lib/X11/mwm $RPM_BUILD_ROOT/etc/X11/mwm
+mv $RPM_BUILD_ROOT%{_prefix}/LessTif/Motif1.2/include/* $RPM_BUILD_ROOT%{_includedir}
+mv $RPM_BUILD_ROOT%{_prefix}/LessTif/Motif1.2/lib/lib* $RPM_BUILD_ROOT%{_libdir}
 
 rm -f doc/INSTALL.html
 
-gzip -9nf $RPM_BUILD_ROOT/usr/X11R6/man/man*/* \
+gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	clients/Motif-1.2/mwm/README \
 	AUTHORS BUG-REPORTING CREDITS CURRENT_NOTES ChangeLog \
 	KNOWN_BUGS NEWS NOTES README RELEASE-POLICY TODO \
 	doc/*.txt
+
+strip --strip-unneeded $RPM_BUILD_ROOT%{_libdir}/lib*.so
 
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
@@ -118,28 +128,27 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root)/usr/X11R6/lib/lib*.so.*.*
-/usr/X11R6/man/man1/lesstif.1.*
+%attr(755,root,root)%{_libdir}/lib*.so.*.*
+%{_mandir}/man1/lesstif.1*
 
 %files mwm
 %defattr(644,root,root,755)
 %doc clients/Motif-1.2/mwm/README*
 %dir /etc/X11/mwm
-%dir /usr/X11R6/lib/X11/mwm
-%attr(755,root,root) /usr/X11R6/bin/mwm
+%config /etc/X11/mwm/*
+%attr(755,root,root) %{_bindir}/mwm
 
-%config /usr/X11R6/lib/X11/mwm/*
-%config /usr/X11R6/lib/X11/app-defaults/*
+%config %{_libdir}/X11/app-defaults/*
 
-/usr/X11R6/man/man1/mwm.1.*
-/usr/X11R6/man/man5/mwmrc.5.*
+%{_mandir}/man1/mwm.1*
+%{_mandir}/man5/mwmrc.5*
 
 %files clients
 %defattr(644,root,root,755)
 %doc doc/UIL.txt*
-%attr(755,root,root) /usr/X11R6/bin/uil
-%attr(755,root,root) /usr/X11R6/bin/xmbind
-/usr/X11R6/man/man1/xmbind.1.*
+%attr(755,root,root) %{_bindir}/uil
+%attr(755,root,root) %{_bindir}/xmbind
+%{_mandir}/man1/xmbind.1*
 
 %files devel
 %defattr(644,root,root,755)
@@ -150,120 +159,19 @@ rm -rf $RPM_BUILD_ROOT
 %docdir /home/httpd/html/Lesstif-%{version}
 %doc /home/httpd/html/Lesstif-%{version}/*
 
-%attr(755,root,root) /usr/X11R6/lib/lib*.so
+%attr(755,root,root) %{_libdir}/lib*.so
 
-/usr/X11R6/include/Mrm
-/usr/X11R6/include/Xm
+%{_includedir}/Mrm
+%{_includedir}/Xm
 
-/usr/X11R6/man/man3/*
+%{_mandir}/man3/*
 
 %files static
 %defattr(644,root,root,755)
-/usr/X11R6/lib/lib*.a
+%{_libdir}/lib*.a
 
 %changelog
-* Wed Apr 28 1999 Artur Frysiak <wiget@pld.org.pl>
-  [0.87.1-3]
-- gzipped docs
-- fixed %%attr
-- added some BuildPrereq
-- recompiled on rpm 3
-- removed Conflicts: glibc <= 2.0.7
-
-* Sat Feb 27 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.87.1-2]
-- added "Conflicts: glibc <= 2.0.7" for preven installing with proper
-  version glibc,
-- simplifications in %files,
-- added %doc for /home/httpd/html/Lesstif-%%{version}/* files,
-- changed permission to 755 on /usr/X11R6/lib/lib*.so,
-- changed Group in static and devel to X11/Development/Libraries,
-- added Group(pl),
-- added gzipping man pages,
-- removed man group from man pages.
-
-* Sun Aug 30 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.86.0]
-- all %doc moved from main package to devel,
-- changed perrmissions on shared libraries to 755,
-- added static subpackage.
- 
-* Sun Jun  7 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.85-1]
-- added --disable-debug configure parameter,
-- fixed few typos.
-
-* Wed May 20 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.84-1]
-- %%{version} macro instead %%{PACKAGE_VERSION},
-- added -q %setup parameter,
-- added using %%{name} macro in Buildroot,
-- added "Requires: %%{name} = %%{version}" for mwm,
-- added documentation in html (/home/httpd/html/Lesstif-%%{version}),
-- changed file list with documentation included to packages also added man3
-  pages and html documentation to dever subpackage,
-- added %defattr macro in %files (require rpm >= 2.4.99; recomended >= 2.5).
-
-* Mon Mar 16 1998 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.83-1]
-- added -q parameter for %setup,
-- now lesstif is compiled as copatible with Motif 1.2,
-- added %defattr macro,
-- removed patching sources for diffrent platforms,
-- runing /configure moved to %buid,
-- changed source URL,
-- added Icon to main and devel subpackage,
-- added using $RPM_OPT_FLAGS in CFLAGS,
-- removed -n parameter from %setup (it is not neccessary),
-- changed Group for main package also changed Group for devel
-  subpackage to Development/Libraries/X11,
-- removed lesstif-M*  subpackages,
-- rearanged Copyright filds,
-- fiew simplification in %files,
-- added stripping /usr/X11R6/bin/{mwm,uil,xmbind},
-- added package icon (lesstif-realsmall.gif),
-- removwd Imake config files (files from XFree86-devel have similar
-  functionality),
-- removed Packager field (if you want recompile and redisstrubute this stuff
-  put this field in your own ~/.rpmrc).
-
-* Fri Nov 21 1997 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.82-1]
-- added "Requires: lesstif-%%{PACKAGE_VERSION}" for devel,
-- changed Copyright to GPL, LGPL,
-- changed --enable-build configure option from 12 to 20 (Motif 2.0 not
-  completly testet by me; please report any problems),
-- added M20 package,
-- in M12 and M20 lesstif shared libs maked with Motiff 1.2/2.0 libs version,
-- added X resources for mwm.
-
-* Mon Sep 15 1997 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.81-2]
-- added missing links libXm.so libMrm.so to devel,
-
-* Wed Sep 10 1997 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.81-1]
-- changed alle %attr for %doc to (-,root,root),
-
-* Sun Jul 20 1997 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-  [0.80-2]
-- added to all %doc %attr macros (this allows build package from normal user
-  account),
-- some simplification in %files (%doc).
-
-* Wed Jul 9 1997 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
-- added using %%{PACKAGE_VERSION} macro in "Source:" and %files,
-- added additional parameter "--enable-build-12" to runing configure,
-- added %postun and %clear,
-- in %post and %postun ldconfig is called as parameter with "-p"
-  (this feature is avalable in rpm >= 2.4.3 and you must have this
-  version and if you want recompile package from src.rpm you must have new
-  version rpm),
-- added package lesstif-M12 simple Motif 1.2 wrapper,
-- simplified %install section,
-- added %attr macros in %files sections,
-- added stripping shared libraries,
-- added URL field,
-- added Lessdox - a html development documentation to lesstif-devel,
-- added lesstif-0.80public-nopedantic.patch, this allow compile lesstif on
-  sparc by removing "-pedantic" from CFLAGS.
+* Fri May 28 1999 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
+  [0.88.1-1]
+- based on RH spec,
+- spec rewrited by PLD team.
