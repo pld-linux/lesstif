@@ -1,0 +1,11 @@
+--- lesstif-0.93.94/aclocal.m4.orig	2003-11-27 20:29:39.000000000 +0100
++++ lesstif-0.93.94/aclocal.m4	2003-12-29 18:16:29.018119680 +0100
+@@ -7547,7 +7547,7 @@
+ LIBS="$LIBS $freetype_lib"
+ saved_CPPFLAGS="$CPPFLAGS"
+ CPPFLAGS="$CPPFLAGS $FREETYPE_CFLAGS"
+-AC_CHECK_HEADERS(freetype/freetype.h)
++AC_CHECK_HEADERS(freetype/freetype.h,,,[#include <ft2build.h>])
+ 
+ LT_HAVE_FREETYPE="no"
+ case "$ac_cv_header_freetype_freetype_h" in
