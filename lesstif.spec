@@ -243,8 +243,8 @@ fi
 
 %files
 %defattr(644,root,root,755)
-%attr(755,root,root)%{_libdir}/libMrm.so.*.*
-%attr(755,root,root)%{_libdir}/libXm.so.*.*
+%attr(755,root,root) %{_libdir}/libMrm.so.*.*
+%attr(755,root,root) %{_libdir}/libXm.so.*.*
 %{_mandir}/man1/lesstif.1*
 
 %files mwm
