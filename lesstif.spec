@@ -155,11 +155,13 @@ Bibliotecas para o lesstif em versão estática.
 
 %build
 rm -f missing
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
 cd test
 rm -f missing
+%{__libtoolize}
 %{__aclocal}
 %{__autoconf}
 %{__automake}
@@ -200,6 +202,15 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
+
+install -d $RPM_BUILD_ROOT%{_mandir}/man1
+install -d $RPM_BUILD_ROOT%{_mandir}/man3
+install -d $RPM_BUILD_ROOT%{_mandir}/man5
+
+mv -f 	$RPM_BUILD_ROOT%{_usr}/man/man1/*		$RPM_BUILD_ROOT%{_mandir}/man1/
+mv -f   $RPM_BUILD_ROOT%{_usr}/man/man3/*		$RPM_BUILD_ROOT%{_mandir}/man3/
+mv -f   $RPM_BUILD_ROOT%{_usr}/man/man5/*		$RPM_BUILD_ROOT%{_mandir}/man5/
+
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -259,7 +270,8 @@ fi
 %{_mandir}/man3/Constraint.3*
 %{_mandir}/man3/Core.3*
 %{_mandir}/man3/LessTifInternals.3*
-%{_mandir}/man3/Object.3*
+# conficts with tcl-devel
+#{_mandir}/man3/Object.3*
 %{_mandir}/man3/OverrideShell.3*
 %{_mandir}/man3/Rect.3*
 %{_mandir}/man3/Shell.3*
