@@ -1,6 +1,6 @@
 Summary:     LessTif - source compatible library with OSF/Motif® 1.2
 Name:        lesstif
-Version:     0.86.9
+Version:     0.87.0
 Release:     1
 #Release:     @DATE@
 Copyright:   LGPL
