@@ -1,4 +1,4 @@
-%define		motif_ver	1.2
+%define		motif_ver	2.1
 %define		mver		%(echo %{motif_ver} | tr -d .)
 Summary:	LessTif - source compatible library with OSF/Motif %{motif_ver}
 Summary(es):	Clon de la caja de herramientas Motif
@@ -6,21 +6,20 @@ Summary(ja):	lesstif - Motif¸ß´¹¥Ä¡¼¥ë¥­¥Ã¥È
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{motif_ver}
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
-Version:	0.93.94
-Release:	4
+Version:	0.93.95
+Release:	1
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
-# Source0-md5:	6ae7340d91ba0566676bd3abb3842203
+# Source0-md5:	0d50b4dbb436971d9ad64c4ea9a33391
 Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
 Source5:	mwm-xsession.desktop
 Patch0:		%{name}-amfix.patch
 Patch1:		%{name}-link.patch
-Patch2:		%{name}-am18.patch
-Patch3:		%{name}-freetype-includes.patch
-Patch4:		%{name}-libdir.patch
+Patch2:		%{name}-freetype-includes.patch
+Patch3:		%{name}-libdir.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -37,8 +36,9 @@ Provides:	motif = %{motif_ver}
 Obsoletes:	lesstif-M12
 Obsoletes:	lesstif-M20
 %if %{mver} >= 20
-# openmotif provides library version 2.1, so there will be conflicts
-Obsoletes:	openmotif
+# openmotif used to provide library version 2.1, so there would be conflicts
+Obsoletes:	openmotif < 2.2
+Obsoletes:	openmotif-libs < 2.2
 %endif
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -180,21 +180,16 @@ Bibliotecas para o lesstif em versão estática.
 %patch1 -p1
 %patch2 -p1
 %patch3 -p1
-%patch4 -p1
 
-# LT_HAVE_LIBXP, AC_FIND_XFT
-tail -n +7387 aclocal.m4 >> acinclude.m4
-# LT_WITH_DMALLOC, LT_WITH_DBMALLOC
-tail -n +7269 aclocal.m4 | head -n 84 >> acinclude.m4
 ln -sf ../acinclude.m4 test/acinclude.m4
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I .
 %{__autoconf}
 %{__automake}
 cd test
-%{__aclocal}
+%{__aclocal} -I ..
 %{__autoconf}
 # -f must not be used here
 automake -a -c --foreign
@@ -257,7 +252,7 @@ fi
 %attr(755,root,root) %{_libdir}/libUil.so.*.*
 %attr(755,root,root) %{_libdir}/libXm.so.*.*
 %if %{mver} >= 21
-%attr(755,root,root) %{_libdir}/libDt.so.*.*
+%attr(755,root,root) %{_libdir}/libDtPrint.so.*.*
 %endif
 %{_mandir}/man1/lesstif.1*
 
@@ -302,8 +297,8 @@ fi
 %{_includedir}/uil
 
 %if %{mver} >= 21
-%attr(755,root,root) %{_libdir}/libDt.so
-%{_libdir}/libDt.la
+%attr(755,root,root) %{_libdir}/libDtPrint.so
+%{_libdir}/libDtPrint.la
 %{_includedir}/Dt
 %endif
 
@@ -331,5 +326,5 @@ fi
 %{_libdir}/libUil.a
 %{_libdir}/libXm.a
 %if %{mver} >= 21
-%{_libdir}/libDt.a
+%{_libdir}/libDtPrint.a
 %endif
