@@ -131,6 +131,7 @@ Summary(pl):	Pliki nag³ówkowe do API Lesstif/Motif %{motif_ver}
 Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimentos com o lesstif
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}
+Requires:	XFree86-devel
 Provides:	motif-devel = %{motif_ver}
 Obsoletes:	openmotif-devel
 Conflicts:	tcl-devel < 8.3.4-8
