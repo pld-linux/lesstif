@@ -57,7 +57,7 @@ O Lesstif é um clone do Motif, com a API compatível.
 
 %package mwm
 Summary:	Lesstif (Motif) window manager clone based on fvwm
-Summary(pl):	Mened¿er okien bazuj±cy na fvwm, ale korzystaj±cy z Lesstifa (Motifa)
+Summary(pl):	Zarz±dca okien oparty na fvwm, ale korzystaj±cy z Lesstifa (Motifa)
 License:	GPL
 Group:		X11/Window Managers
 Requires:	%{name} = %{version}
