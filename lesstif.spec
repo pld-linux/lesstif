@@ -255,8 +255,8 @@ fi
 
 %attr(755,root,root) %{_libdir}/libMrm.so
 %attr(755,root,root) %{_libdir}/libXm.so
-%attr(755,root,root) %{_libdir}/libMrm.la
-%attr(755,root,root) %{_libdir}/libXm.la
+%{_libdir}/libMrm.la
+%{_libdir}/libXm.la
 
 %{_includedir}/Mrm
 %{_includedir}/Xm
