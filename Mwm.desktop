@@ -8,3 +8,4 @@ TryExec=mwm
 
 [Window Manager]
 SessionManaged=true
+# vi: encoding=utf-8
