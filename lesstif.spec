@@ -1,7 +1,7 @@
 Summary:	LessTif - source compatible library with OSF/Motif® 1.2
 Name:		lesstif
 Version:	0.89.4
-Release:	1
+Release:	2
 Copyright:	LGPL
 Group:		X11/Libraries
 Group(pl):	X11/Biblioteki
@@ -14,9 +14,9 @@ Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	man2html
 BuildRequires:	lynx
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	lesstif-M20
 Obsoletes:	lesstif-M12
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_prefix		/usr/X11R6
 %define		_mandir		%{_prefix}/man
@@ -55,6 +55,7 @@ Copyright:	LGPL
 Group:		X11/Development/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name} = %{version}
+Provides:	motif-devel
 
 %description devel
 This package contains the lesstif header files required to develop Motif 1.2
@@ -67,6 +68,7 @@ Copyright:	LGPL
 Group:		X11/Development/Libraries
 Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
+Provides:	motif-static
 
 %description static
 This package contains the lesstif static libraries.
