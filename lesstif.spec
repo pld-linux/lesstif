@@ -7,7 +7,7 @@ Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.93.95
-Release:	1
+Release:	2
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
@@ -76,7 +76,6 @@ Summary(pl):	Zarz±dca okien oparty na fvwm, ale korzystaj±cy z Lesstifa (Motifa)
 License:	GPL
 Group:		X11/Window Managers
 Requires:	%{name} = %{version}-%{release}
-Requires:	wmconfig >= 0.9.9-5
 Requires:	xinitrc-ng
 Obsoletes:	openmotif-mwm
 
