@@ -169,13 +169,13 @@ LDFLAGS="-s"; export LDFLAGS
 	--disable-build-20 \
 	--disable-default-20
 
-make mwmddir=/etc/X11/mwm
+%{__make} mwmddir=/etc/X11/mwm
 
 %install
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT/{etc/X11,usr/{share/aclocal,X11R6/share/gnome/wm-properties}}
 
-make install \
+%{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	mwmddir=/etc/X11/mwm \
 	htmldir=/home/httpd/html/Lesstif-%{version}
