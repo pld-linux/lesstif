@@ -1,0 +1,9 @@
+diff -Nru lesstif-0.89.0/Makefile.am lesstif-0.89.0.new/Makefile.am
+--- lesstif-0.89.0/Makefile.am	Fri Aug 13 09:30:26 1999
++++ lesstif-0.89.0.new/Makefile.am	Mon Sep 27 19:48:26 1999
+@@ -27,4 +27,4 @@
+ html_DATA=	NOTES
+ 
+ install-data-hook:
+-	${INSTALL_DATA} $(srcdir)/NOTES $(htmldir)/release-notes.html
++	${INSTALL_DATA} $(srcdir)/NOTES $(DESTDIR)$(htmldir)/release-notes.html
