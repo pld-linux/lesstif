@@ -32,8 +32,7 @@ Obsoletes:	openmotif
 Provides:	motif = %{motif_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-
-%define		_wmpropsdir	%{_datadir}/wm-properties
+%define		_wmpropsdir	/usr/share/wm-properties
 
 %description
 Lesstif is an API compatible clone of the Motif %{motif_ver} toolkit.
