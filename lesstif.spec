@@ -5,7 +5,7 @@ Summary(es):	Clon de la caja de herramientas Motif
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{motif_ver}
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
-Version:	0.93.15
+Version:	0.93.18
 Release:	1
 License:	LGPL
 Group:		X11/Libraries
