@@ -9,8 +9,8 @@ Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar
 #Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-current.tar.gz
 Source1:	Mwm.desktop
 Source2:	mwmrc
-Source3:	mwmrc-pre
-Source4:	mwmrc-post
+Source3:	mwm.RunWM
+Source4:	mwm.wm_style
 Patch0:		lesstif-DESTDIR.patch
 Patch1:		lesstif-automake.patch
 Icon:		lesstif-realsmall.gif
@@ -37,7 +37,8 @@ Copyright:	GPL
 Group:		X11/Window Managers
 Group(pl):	X11/Zarz±dcy Okien
 Requires:	%{name} = %{version}
-Requires:	wmconfig >= 0.9.8-3
+Requires:	wmconfig >= 0.9.9-5
+Requires:	xinitrc >= 3.0
 
 %description mwm
 A BETA release of mwm.  It is derived from fvwm, with a new parser that
@@ -179,7 +180,7 @@ LDFLAGS="-s"; export LDFLAGS
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT/{etc/X11,usr/{share/aclocal,X11R6/share/gnome/wm-properties}}
+install -d $RPM_BUILD_ROOT/{etc/{sysconfig/wmstyle,X11},usr/{share/aclocal,X11R6/share/gnome/wm-properties}}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
@@ -201,8 +202,9 @@ install lib/Xbae/ac_find_xbae.m4 $RPM_BUILD_ROOT/usr/share/aclocal
 install %{SOURCE1} $RPM_BUILD_ROOT/usr/X11R6/share/gnome/wm-properties
 
 install %{SOURCE2} $RPM_BUILD_ROOT/etc/X11/mwm/system.mwmrc
-install %{SOURCE3} $RPM_BUILD_ROOT/etc/X11/mwm/
-install %{SOURCE4} $RPM_BUILD_ROOT/etc/X11/mwm/
+
+install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
+install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
 
 gzip -9nf $RPM_BUILD_ROOT%{_mandir}/man*/* \
 	clients/Motif-1.2/mwm/README \
@@ -244,6 +246,8 @@ rm -rf $RPM_BUILD_ROOT
 %dir /etc/X11/mwm
 /usr/X11R6/share/gnome/wm-properties/Mwm.desktop
 %config /etc/X11/mwm/*
+%attr(755,root,root) /etc/sysconfig/wmstyle/*.sh
+/etc/sysconfig/wmstyle/*.names
 %attr(755,root,root) %{_bindir}/mwm
 
 %config %{_libdir}/X11/app-defaults/*
