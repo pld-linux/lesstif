@@ -156,7 +156,7 @@ Bibliotecas para o lesstif em versão estática.
 %build
 aclocal
 autoconf
-automake -a -c
+automake -a -c -f
 (cd test
 aclocal
 autoconf
