@@ -13,6 +13,7 @@ Patch1:		lesstif-automake.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	man2html
+BuildRequires:	lynx
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	lesstif-M20
 Obsoletes:	lesstif-M12
