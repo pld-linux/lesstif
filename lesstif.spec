@@ -202,7 +202,7 @@ rm -rf $RPM_BUILD_ROOT
 
 * Sun Jul 20 1997 Tomasz K³oczko <kloczek@rudy.mif.pg.gda.pl>
   [0.80-2]
-- added to all %doc %attr macros (this allow build package from normal user
+- added to all %doc %attr macros (this allows build package from normal user
   account),
 - some simplification in %files (%doc).
 
