@@ -6,7 +6,7 @@ Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.93.18
-Release:	2
+Release:	3
 License:	LGPL
 Group:		X11/Libraries
 Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.bz2
@@ -15,6 +15,7 @@ Source2:	mwmrc
 Source3:	mwm.RunWM
 Source4:	mwm.wm_style
 Patch0:		%{name}-am.patch
+Patch1:		%{name}-am16.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -152,15 +153,17 @@ Bibliotecas para o lesstif em versão estática.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 aclocal
 autoconf
 automake -a -c -f
-(cd test
+cd test
 aclocal
 autoconf
-automake -a -c)
+automake -a -c -f
+cd ..
 
 %configure \
 	--enable-shared \
@@ -183,7 +186,7 @@ install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig/wmstyle,X11},%{_aclocaldir}
 
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-mwmddir=%{_sysconfdir}/X11/mwm \
+	mwmddir=%{_sysconfdir}/X11/mwm \
 	htmldir=/htmldoc
 
 mv -f $RPM_BUILD_ROOT/htmldoc .
@@ -203,6 +206,9 @@ gzip -9nf clients/Motif-%{motif_ver}/mwm/README \
 	ChangeLog NEWS README ReleaseNotes.txt \
 	doc/*.txt
 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
 %post   -p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
@@ -211,9 +217,6 @@ if [ -L %{_sysconfdir}/X11/mwm ]; then
 	rm -rf %{_sysconfdir}/X11/mwm
 	rm -rf %{_libdir}/X11/mwm/*
 fi
-
-%clean
-rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
