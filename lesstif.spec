@@ -48,7 +48,7 @@ Uil and xmbind.
 Summary:	Header files for Lesstif/Motif 1.2 development
 Copyright:	LGPL
 Group:		X11/Development/Libraries
-Group(pl):	X11/Programowanie/Libraries
+Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name} = %{version}
 
 %description devel
@@ -59,7 +59,7 @@ based applications.
 Summary:	Static Lesstif library
 Copyright:	LGPL
 Group:		X11/Development/Libraries
-Group(pl):	X11/Programowanie/Libraries
+Group(pl):	X11/Programowanie/Biblioteki
 Requires:	%{name}-devel = %{version}
 
 %description static
