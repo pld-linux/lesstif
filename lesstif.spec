@@ -346,8 +346,8 @@ rm -rf $RPM_BUILD_ROOT
 %attr(755,root,root) %{_libdir}/libMrm.la
 %attr(755,root,root) %{_libdir}/libXm.la
 
-%{_includedir}/Mrm
-%{_includedir}/Xm
+#%{_includedir}/Mrm
+#%{_includedir}/Xm
 %{_aclocaldir}/ac_find_motif.m4
 
 %{_mandir}/man3/Composite.3*
