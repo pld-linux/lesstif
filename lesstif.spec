@@ -2,40 +2,39 @@
 
 Summary:	LessTif - source compatible library with OSF/Motif %{motif_ver}
 Summary(es):	Clon de la caja de herramientas Motif
+Summary(ja):	lesstif - Motif¸ß´¹¥Ä¡¼¥ë¥­¥Ã¥È
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{motif_ver}
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
-Version:	0.93.18
-Release:	3
+Version:	0.93.41
+Release:	1
 License:	LGPL
 Group:		X11/Libraries
-Source0:	ftp://ftp.lesstif.org/pub/hungry/lesstif/srcdist/%{name}-%{version}.tar.bz2
+Source0:	http://prdownloads.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
 Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
 Source4:	mwm.wm_style
-Patch0:		%{name}-am.patch
-Patch1:		%{name}-am16.patch
+Patch0:		%{name}-amfix.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
-BuildRequires:	lynx
-BuildRequires:	flex
 BuildRequires:	bison
+BuildRequires:	flex
+BuildRequires:	libtool
+BuildRequires:	lynx
 Obsoletes:	lesstif-M20
 Obsoletes:	lesstif-M12
 %if %(echo %{motif_ver} | sed s/\\.//) >= 20
-# openmotif provides library version 2.1, so there witl be conflicts
+# openmotif provides library version 2.1, so there will be conflicts
 Obsoletes:	openmotif
 %endif
 Provides:	motif = %{motif_ver}
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_prefix		/usr/X11R6
-%define		_mandir		%{_prefix}/man
-
-%define		_wmpropsdir	%{_datadir}/wm-properties
+%define		_wmpropsdir	/usr/share/wm-properties
+%define		addir		/usr/X11R6/lib/X11/app-defaults
 
 %description
 Lesstif is an API compatible clone of the Motif %{motif_ver} toolkit.
@@ -45,7 +44,15 @@ missing. The primary objectives have been to develop the widget code
 of the Lesstif Toolkit.
 
 %description -l es
-Clon de la caja de herramientas Motif
+Clon de la caja de herramientas Motif.
+
+%description -l ja
+
+
+Lesstif¤Ï¡¢Motif¥Ä¡¼¥ë¥­¥Ã¥È¤ÈAPI¥ì¥Ù¥ë¤Î¸ß´¹À­¤ò¤â¤Ä¥Ä¡¼¥ë¥­¥Ã¥È¤Ç¤¹¡£
+¸½ºß¤ÎLesstif¤Ï¡¢¤Û¤È¤ó¤É¤ÎAPI¤ò¼ÂÁõ¤·¤Æ¤¤¤Þ¤¹¤¬¡¢°ìÉô¤ÎÆâÉô´Ø¿ô¤Ï
+¤Þ¤À¼ÂÁõ¤µ¤ì¤Æ¤¤¤Þ¤»¤ó¡£Â¿¤¯¤ÎMotif¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¤ÏLesstif¤ò»È¤Ã¤Æ
+¥³¥ó¥Ñ¥¤¥ëµÚ¤Ó¼Â¹Ô¤¹¤ë¤³¤È¤¬¤Ç¤­¤Þ¤¹¡£
 
 %description -l pl
 Lesstif jest bibliotek± kompatybiln± z API Motif %{motif_ver}.
@@ -57,7 +64,8 @@ O Lesstif é um clone do Motif, com a API compatível.
 
 %package mwm
 Summary:	Lesstif (Motif) window manager clone based on fvwm
-Summary(pl):	Mened¿er okien bazuj±cy na fvwm, ale korzystaj±cy z Lesstifa (Motifa)
+Summary(ja):	fvwm¤ò¥Ù¡¼¥¹¤Ë¤·¤¿Motif¥¦¥¤¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã
+Summary(pl):	Zarz±dca okien oparty na fvwm, ale korzystaj±cy z Lesstifa (Motifa)
 License:	GPL
 Group:		X11/Window Managers
 Requires:	%{name} = %{version}
@@ -74,6 +82,9 @@ resources.
 MWM es un administrador de ventanas que adhiere ampliamente a la
 especificación Motif.
 
+%description -l ja
+MWM¤Ï¡¢Motif¤Îmwm¥¹¥Ú¥Ã¥¯¤Ë½àµò¤·¤¿¥¦¥¤¥ó¥É¥¦¥Þ¥Í¡¼¥¸¥ã¤Ç¤¹¡£
+
 %description mwm -l pl
 Wersja BETA mwm. Wywodzi siê z fvwm, a z nowym parserem rozumiej±cym
 sk³adniê mwmrc i zasoby Mwm.
@@ -84,6 +95,7 @@ Motif.
 
 %package clients
 Summary:	Lesstif clients
+Summary(ja):	lesstif¥¯¥é¥¤¥¢¥ó¥È
 Summary(pl):	Programy klienckie do Lesstifa
 License:	GPL
 Group:		X11/Applications
@@ -95,6 +107,9 @@ Uil and xmbind.
 
 %description clients -l es
 Clientes de lesstif.
+
+%description -l ja
+Uil¤Èxmbind
 
 %description clients -l pl
 Uil i xmbind.
@@ -111,6 +126,7 @@ Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}
 Provides:	motif-devel = %{motif_ver}
 Obsoletes:	openmotif-devel
+Conflicts:	tcl-devel < 8.3.4-8
 
 %description devel
 This package contains the lesstif header files required to develop
@@ -153,16 +169,19 @@ Bibliotecas para o lesstif em versão estática.
 %prep
 %setup -q
 %patch0 -p1
-%patch1 -p1
 
 %build
-aclocal
-autoconf
-automake -a -c -f
+rm -f missing
+%{__libtoolize}
+%{__aclocal}
+%{__autoconf}
+%{__automake}
 cd test
-aclocal
-autoconf
-automake -a -c -f
+rm -f missing
+%{__aclocal} -I ..
+%{__autoconf}
+# -f must not be used here
+automake -a -c --foreign
 cd ..
 
 %configure \
@@ -184,6 +203,10 @@ cd ..
 rm -rf $RPM_BUILD_ROOT
 install -d $RPM_BUILD_ROOT{%{_sysconfdir}/{sysconfig/wmstyle,X11},%{_aclocaldir},%{_wmpropsdir}}
 
+# for proper app-defaults path
+install -d $RPM_BUILD_ROOT{%{addir},%{_libdir}}
+ln -sf ../X11R6/lib/X11 $RPM_BUILD_ROOT%{_libdir}/X11
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	mwmddir=%{_sysconfdir}/X11/mwm \
@@ -200,11 +223,6 @@ install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
 install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
 install %{SOURCE4} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.names
-
-gzip -9nf clients/Motif-%{motif_ver}/mwm/README \
-	AUTHORS BUG-REPORTING CREDITS \
-	ChangeLog NEWS README ReleaseNotes.txt \
-	doc/*.txt
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -234,7 +252,7 @@ fi
 /etc/sysconfig/wmstyle/*.names
 %attr(755,root,root) %{_bindir}/mwm
 
-%{_libdir}/X11/app-defaults/*
+%{addir}/*
 
 %{_mandir}/man1/mwm.1*
 %{_mandir}/man5/mwmrc.5*
@@ -244,22 +262,24 @@ fi
 %doc doc/UIL.txt*
 %attr(755,root,root) %{_bindir}/uil
 %attr(755,root,root) %{_bindir}/xmbind
+%{_mandir}/man1/uil.1*
 %{_mandir}/man1/xmbind.1*
 
 %files devel
 %defattr(644,root,root,755)
-%doc {AUTHORS,BUG-REPORTING,CREDITS,ChangeLog,NEWS,README,ReleaseNotes.txt}.gz
+%doc AUTHORS BUG-REPORTING CREDITS ChangeLog NEWS README ReleaseNotes.txt
 %doc doc/*.txt* doc/*.html doc/www.lesstif.org/{images/*png,*html} htmldoc/*
 
 %attr(755,root,root) %{_libdir}/libMrm.so
 %attr(755,root,root) %{_libdir}/libXm.so
-%attr(755,root,root) %{_libdir}/libMrm.la
-%attr(755,root,root) %{_libdir}/libXm.la
+%{_libdir}/libMrm.la
+%{_libdir}/libXm.la
 
 %{_includedir}/Mrm
 %{_includedir}/Xm
 %{_aclocaldir}/ac_find_motif.m4
 
+%{_mandir}/man3/ApplicationShell.3*
 %{_mandir}/man3/Composite.3*
 %{_mandir}/man3/Constraint.3*
 %{_mandir}/man3/Core.3*
