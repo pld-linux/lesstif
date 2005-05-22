@@ -6,20 +6,19 @@ Summary(ja):	lesstif - Motif¸ß´¹¥Ä¡¼¥ë¥­¥Ã¥È
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{motif_ver}
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
-Version:	0.94.0
+Version:	0.94.4
 Release:	1
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
-# Source0-md5:	20f38a06c863e0c51ca0c862ef039601
+# Source0-md5:	3096ca456c0bc299d895974d307c82d8
 Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
 Source5:	mwm-xsession.desktop
-Patch0:		%{name}-amfix.patch
-Patch1:		%{name}-link.patch
-Patch2:		%{name}-freetype-includes.patch
-Patch3:		%{name}-libdir.patch
+Patch0:		%{name}-link.patch
+Patch1:		%{name}-freetype-includes.patch
+Patch2:		%{name}-libdir.patch
 Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
@@ -178,7 +177,6 @@ Bibliotecas para o lesstif em versão estática.
 %patch0 -p1
 %patch1 -p1
 %patch2 -p1
-%patch3 -p1
 
 ln -sf ../acinclude.m4 test/acinclude.m4
 
@@ -283,14 +281,15 @@ fi
 %defattr(644,root,root,755)
 %doc AUTHORS BUG-REPORTING CREDITS ChangeLog NEWS README ReleaseNotes.txt
 %doc doc/*.txt* doc/*.html doc/www.lesstif.org/{images/*png,*html} htmldoc/*
+%attr(755,root,root) %{_bindir}/motif-config
 %attr(755,root,root) %{_bindir}/mxmkmf
-
 %attr(755,root,root) %{_libdir}/libMrm.so
 %attr(755,root,root) %{_libdir}/libUil.so
 %attr(755,root,root) %{_libdir}/libXm.so
 %{_libdir}/libMrm.la
 %{_libdir}/libUil.la
 %{_libdir}/libXm.la
+%{_libdir}/LessTif
 %{_includedir}/Mrm
 %{_includedir}/Xm
 %{_includedir}/uil
