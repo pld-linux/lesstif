@@ -19,7 +19,6 @@ Source5:	mwm-xsession.desktop
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-freetype-includes.patch
 Patch2:		%{name}-libdir.patch
-Icon:		lesstif-realsmall.gif
 BuildRequires:	XFree86-devel
 BuildRequires:	autoconf
 BuildRequires:	automake
