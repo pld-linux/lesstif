@@ -6,30 +6,33 @@ Summary(ja):	lesstif - Motif¸ß´¹¥Ä¡¼¥ë¥­¥Ã¥È
 Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{motif_ver}
 Summary(pt_BR):	Um clone do Motif toolkit
 Name:		lesstif
-Version:	0.94.4
+Version:	0.95.0
 Release:	1
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
-# Source0-md5:	3096ca456c0bc299d895974d307c82d8
+# Source0-md5:	ab895165c149d7f95843c7584b1c7ad4
 Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
 Source5:	mwm-xsession.desktop
 Patch0:		%{name}-link.patch
-Patch1:		%{name}-freetype-includes.patch
-Patch2:		%{name}-libdir.patch
-BuildRequires:	XFree86-devel
-BuildRequires:	autoconf
+Patch1:		%{name}-ac.patch
+BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
 BuildRequires:	libtool
 BuildRequires:	lynx
+BuildRequires:	xorg-lib-libXp-devel
+BuildRequires:	xorg-lib-libXt-devel >= 1.0.0
 %if %{mver} >= 20
+BuildRequires:	fontconfig-devel
 BuildRequires:	freetype-devel >= 2.1.0
-BuildRequires:	xft-devel
+BuildRequires:	xorg-lib-libXft-devel
+BuildRequires:	xorg-lib-libXrender-devel
 %endif
+Requires:	xorg-lib-libXt >= 1.0.0
 Provides:	motif = %{motif_ver}
 Obsoletes:	lesstif-M12
 Obsoletes:	lesstif-M20
@@ -41,7 +44,7 @@ Obsoletes:	openmotif-libs < 2.2
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %define		_wmpropsdir	/usr/share/wm-properties
-%define		_appdefsdir	/usr/X11R6/lib/X11/app-defaults
+%define		_appdefsdir	/usr/share/X11/app-defaults
 
 %description
 Lesstif is an API compatible clone of the Motif %{motif_ver} toolkit.
@@ -175,7 +178,6 @@ Bibliotecas para o lesstif em versão estática.
 %setup -q
 %patch0 -p1
 %patch1 -p1
-%patch2 -p1
 
 ln -sf ../acinclude.m4 test/acinclude.m4
 
@@ -191,6 +193,7 @@ cd test
 automake -a -c --foreign
 cd ..
 
+# --x-includes is needed to detect Xft headers
 %configure \
 	--enable-shared \
 	--enable-static \
@@ -202,7 +205,8 @@ cd ..
 	--disable-build-12 \
 	--disable-build-20 \
 	--disable-build-21 \
-	--enable-build-%(echo %{motif_ver} | sed s/\\.//)
+	--enable-build-%(echo %{motif_ver} | sed s/\\.//) \
+	--x-includes=/usr/include
 
 %{__make} \
 	mwmddir=%{_sysconfdir}/X11/mwm
