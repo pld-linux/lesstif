@@ -1,0 +1,11 @@
+--- lesstif-0.95.0/acinclude.m4.orig	2005-11-01 09:14:56.000000000 +0100
++++ lesstif-0.95.0/acinclude.m4	2006-07-23 00:06:02.852621750 +0200
+@@ -375,7 +375,7 @@
+ AC_PATH_PROG(man2html_cmd, man2html)
+ if test -x "$man2html_cmd"
+ then
+-  if test -z "`$man2html_cmd </dev/null 2>&1 | grep \"LessTif's man2html\"`"
++  if test -z "`$man2html_cmd </dev/null 2>&1 | grep \"LessTif\'s man2html\"`"
+   then
+      dnl found wrong one
+      MAN2HTML="\$(top_builddir)/scripts/man2html"
