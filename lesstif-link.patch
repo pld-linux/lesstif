@@ -5,7 +5,7 @@
  endif
  
 -libXm_la_LIBADD = $(X_PRE_LIBS) -lXt $(XPLIB) $(X_LIBS) -lX11 $(X_EXTRA_LIBS)
-+libXm_la_LIBADD = $(X_PRE_LIBS) -lXt $(XPLIB) $(X_LIBS) -lX11 $(X_EXTRA_LIBS) $(XFT_LIBS)
++libXm_la_LIBADD = -lXt $(XPLIB) $(X_LIBS) -lX11 $(X_EXTRA_LIBS) $(XFT_LIBS)
  
  #if Have_Libxp
  #libXm_la_LIBADD = -lXt $(X_PRE_LIBS) -lXp -lXext -lX11 \
