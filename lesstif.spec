@@ -77,7 +77,6 @@ Summary(pl):	Zarz±dca okien oparty na fvwm, ale korzystaj±cy z Lesstifa (Motifa)
 License:	GPL
 Group:		X11/Window Managers
 Requires:	%{name} = %{version}-%{release}
-Requires:	xinitrc-ng
 Obsoletes:	openmotif-mwm
 
 %description mwm
