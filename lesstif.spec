@@ -1,10 +1,10 @@
 %define		motif_ver	2.1
 %define		mver		%(echo %{motif_ver} | tr -d .)
 Summary:	LessTif - source compatible library with OSF/Motif %{motif_ver}
-Summary(es):	Clon de la caja de herramientas Motif
-Summary(ja):	lesstif - Motif¸ß´¹¥Ä¡¼¥ë¥­¥Ã¥È
-Summary(pl):	LessTif - biblioteka kompatybilna na poziomie ¼róde³ z OSF/Motif %{motif_ver}
-Summary(pt_BR):	Um clone do Motif toolkit
+Summary(es.UTF-8):   Clon de la caja de herramientas Motif
+Summary(ja.UTF-8):   lesstif - Motifäº’æ›ãƒ„ãƒ¼ãƒ«ã‚­ãƒƒãƒˆ
+Summary(pl.UTF-8):   LessTif - biblioteka kompatybilna na poziomie ÅºrÃ³deÅ‚ z OSF/Motif %{motif_ver}
+Summary(pt_BR.UTF-8):   Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.95.0
 Release:	1
@@ -53,27 +53,27 @@ place. Saying this a lot of the internal functionality is still
 missing. The primary objectives have been to develop the widget code
 of the Lesstif Toolkit.
 
-%description -l es
+%description -l es.UTF-8
 Clon de la caja de herramientas Motif.
 
-%description -l ja
-Lesstif¤Ï¡¢Motif¥Ä¡¼¥ë¥­¥Ã¥È¤ÈAPI¥ì¥Ù¥ë¤Î¸ß´¹À­¤ò¤â¤Ä¥Ä¡¼¥ë¥­¥Ã¥È¤Ç¤¹¡£
-¸½ºß¤ÎLesstif¤Ï¡¢¤Û¤È¤ó¤É¤ÎAPI¤ò¼ÂÁõ¤·¤Æ¤¤¤Ş¤¹¤¬¡¢°ìÉô¤ÎÆâÉô´Ø¿ô¤Ï
-¤Ş¤À¼ÂÁõ¤µ¤ì¤Æ¤¤¤Ş¤»¤ó¡£Â¿¤¯¤ÎMotif¥¢¥×¥ê¥±¡¼¥·¥ç¥ó¤ÏLesstif¤ò»È¤Ã¤Æ
-¥³¥ó¥Ñ¥¤¥ëµÚ¤Ó¼Â¹Ô¤¹¤ë¤³¤È¤¬¤Ç¤­¤Ş¤¹¡£
+%description -l ja.UTF-8
+Lesstifã¯ã€Motifãƒ„ãƒ¼ãƒ«ã‚­ãƒƒãƒˆã¨APIãƒ¬ãƒ™ãƒ«ã®äº’æ›æ€§ã‚’ã‚‚ã¤ãƒ„ãƒ¼ãƒ«ã‚­ãƒƒãƒˆã§ã™ã€‚
+ç¾åœ¨ã®Lesstifã¯ã€ã»ã¨ã‚“ã©ã®APIã‚’å®Ÿè£…ã—ã¦ã„ã¾ã™ãŒã€ä¸€éƒ¨ã®å†…éƒ¨é–¢æ•°ã¯
+ã¾ã å®Ÿè£…ã•ã‚Œã¦ã„ã¾ã›ã‚“ã€‚å¤šãã®Motifã‚¢ãƒ—ãƒªã‚±ãƒ¼ã‚·ãƒ§ãƒ³ã¯Lesstifã‚’ä½¿ã£ã¦
+ã‚³ãƒ³ãƒ‘ã‚¤ãƒ«åŠã³å®Ÿè¡Œã™ã‚‹ã“ã¨ãŒã§ãã¾ã™ã€‚
 
-%description -l pl
-Lesstif jest bibliotek± kompatybiln± z API Motif %{motif_ver}.
-Aktualnie implementacja jest czê¶ciowa, wiêkszo¶æ API istnieje, ale
-spora czê¶æ funkcjonalno¶ci wewnêtrznej jest nie dokoñczona.
+%description -l pl.UTF-8
+Lesstif jest bibliotekÄ… kompatybilnÄ… z API Motif %{motif_ver}.
+Aktualnie implementacja jest czÄ™Å›ciowa, wiÄ™kszoÅ›Ä‡ API istnieje, ale
+spora czÄ™Å›Ä‡ funkcjonalnoÅ›ci wewnÄ™trznej jest nie dokoÅ„czona.
 
-%description -l pt_BR
-O Lesstif é um clone do Motif, com a API compatível.
+%description -l pt_BR.UTF-8
+O Lesstif Ã© um clone do Motif, com a API compatÃ­vel.
 
 %package mwm
 Summary:	Lesstif (Motif) window manager clone based on fvwm
-Summary(ja):	fvwm¤ò¥Ù¡¼¥¹¤Ë¤·¤¿Motif¥¦¥¤¥ó¥É¥¦¥Ş¥Í¡¼¥¸¥ã
-Summary(pl):	Zarz±dca okien oparty na fvwm, ale korzystaj±cy z Lesstifa (Motifa)
+Summary(ja.UTF-8):   fvwmã‚’ãƒ™ãƒ¼ã‚¹ã«ã—ãŸMotifã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒãƒ¼ã‚¸ãƒ£
+Summary(pl.UTF-8):   ZarzÄ…dca okien oparty na fvwm, ale korzystajÄ…cy z Lesstifa (Motifa)
 License:	GPL
 Group:		X11/Window Managers
 Requires:	%{name} = %{version}-%{release}
@@ -84,25 +84,25 @@ A BETA release of mwm. It is derived from fvwm, with a new parser that
 understands mwmrc syntax, and a general understanding of Mwm
 resources.
 
-%description mwm -l es
+%description mwm -l es.UTF-8
 MWM es un administrador de ventanas que adhiere ampliamente a la
-especificación Motif.
+especificaciÃ³n Motif.
 
-%description mwm -l ja
-MWM¤Ï¡¢Motif¤Îmwm¥¹¥Ú¥Ã¥¯¤Ë½àµò¤·¤¿¥¦¥¤¥ó¥É¥¦¥Ş¥Í¡¼¥¸¥ã¤Ç¤¹¡£
+%description mwm -l ja.UTF-8
+MWMã¯ã€Motifã®mwmã‚¹ãƒšãƒƒã‚¯ã«æº–æ‹ ã—ãŸã‚¦ã‚¤ãƒ³ãƒ‰ã‚¦ãƒãƒãƒ¼ã‚¸ãƒ£ã§ã™ã€‚
 
-%description mwm -l pl
-Wersja BETA mwm. Wywodzi siê z fvwm, a z nowym parserem rozumiej±cym
-sk³adniê mwmrc i zasoby Mwm.
+%description mwm -l pl.UTF-8
+Wersja BETA mwm. Wywodzi siÄ™ z fvwm, a z nowym parserem rozumiejÄ…cym
+skÅ‚adniÄ™ mwmrc i zasoby Mwm.
 
-%description mwm -l pt_BR
-O MWM é um gerenciador de janelas que adere largamente à especificação
+%description mwm -l pt_BR.UTF-8
+O MWM Ã© um gerenciador de janelas que adere largamente Ã  especificaÃ§Ã£o
 Motif.
 
 %package clients
 Summary:	Lesstif clients
-Summary(ja):	lesstif¥¯¥é¥¤¥¢¥ó¥È
-Summary(pl):	Programy klienckie do Lesstifa
+Summary(ja.UTF-8):   lesstifã‚¯ãƒ©ã‚¤ã‚¢ãƒ³ãƒˆ
+Summary(pl.UTF-8):   Programy klienckie do Lesstifa
 License:	GPL
 Group:		X11/Applications
 Requires:	%{name} = %{version}-%{release}
@@ -111,23 +111,23 @@ Obsoletes:	openmotif-clients
 %description clients
 Uil and xmbind.
 
-%description clients -l es
+%description clients -l es.UTF-8
 Clientes de lesstif.
 
-%description clients -l ja
-Uil¤Èxmbind
+%description clients -l ja.UTF-8
+Uilã¨xmbind
 
-%description clients -l pl
+%description clients -l pl.UTF-8
 Uil i xmbind.
 
-%description clients -l pt_BR
+%description clients -l pt_BR.UTF-8
 lesstiff: Uil e xmbind.
 
 %package devel
 Summary:	Header files for Lesstif/Motif %{motif_ver} development
-Summary(es):	Bibliotecas y archivos de inclusión para desarrollo del lesstif
-Summary(pl):	Pliki nag³ówkowe do API Lesstif/Motif %{motif_ver}
-Summary(pt_BR):	Bibliotecas e arquivos de inclusão para desenvolvimentos com o lesstif
+Summary(es.UTF-8):   Bibliotecas y archivos de inclusiÃ³n para desarrollo del lesstif
+Summary(pl.UTF-8):   Pliki nagÅ‚Ã³wkowe do API Lesstif/Motif %{motif_ver}
+Summary(pt_BR.UTF-8):   Bibliotecas e arquivos de inclusÃ£o para desenvolvimentos com o lesstif
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
 Requires:	XFree86-devel
@@ -139,23 +139,23 @@ Conflicts:	tcl-devel < 8.3.4-8
 This package contains the lesstif header files required to develop
 Motif %{motif_ver} based applications.
 
-%description devel -l es
-Bibliotecas y archivos de inclusión que se requieren para desarrollar
+%description devel -l es.UTF-8
+Bibliotecas y archivos de inclusiÃ³n que se requieren para desarrollar
 aplicaciones basadas en lesstif/motif-%{motif_ver}.
 
-%description devel -l pl
-Pakiet zawiera pliki nag³ówkowe potrzebne do kompilacji aplikacji
+%description devel -l pl.UTF-8
+Pakiet zawiera pliki nagÅ‚Ã³wkowe potrzebne do kompilacji aplikacji
 opartych o Motif %{motif_ver}.
 
-%description devel -l pt_BR
-Bibliotecas e arquivos de inclusão requeridas para desenvolver
-aplicações baseadas no lesstif/motif-%{motif_ver}.
+%description devel -l pt_BR.UTF-8
+Bibliotecas e arquivos de inclusÃ£o requeridas para desenvolver
+aplicaÃ§Ãµes baseadas no lesstif/motif-%{motif_ver}.
 
 %package static
 Summary:	Static Lesstif library
-Summary(es):	Bibliotecas para lesstif en versión estática
-Summary(pl):	Biblioteki statyczne Lesstifa
-Summary(pt_BR):	Bibliotecas para o lesstif em versão estática
+Summary(es.UTF-8):   Bibliotecas para lesstif en versiÃ³n estÃ¡tica
+Summary(pl.UTF-8):   Biblioteki statyczne Lesstifa
+Summary(pt_BR.UTF-8):   Bibliotecas para o lesstif em versÃ£o estÃ¡tica
 Group:		X11/Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
 Provides:	motif-static
@@ -164,14 +164,14 @@ Obsoletes:	openmotif-static
 %description static
 This package contains the lesstif static libraries.
 
-%description static -l es
-Bibliotecas para lesstif en versión estática.
+%description static -l es.UTF-8
+Bibliotecas para lesstif en versiÃ³n estÃ¡tica.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteki statyczne Lesstifa.
 
-%description static -l pt_BR
-Bibliotecas para o lesstif em versão estática.
+%description static -l pt_BR.UTF-8
+Bibliotecas para o lesstif em versÃ£o estÃ¡tica.
 
 %prep
 %setup -q
