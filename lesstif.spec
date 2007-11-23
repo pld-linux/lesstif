@@ -7,7 +7,7 @@ Summary(pl.UTF-8):	LessTif - biblioteka kompatybilna na poziomie źródeł z OSF
 Summary(pt_BR.UTF-8):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.95.0
-Release:	1
+Release:	2
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
@@ -18,6 +18,7 @@ Source3:	mwm.RunWM
 Source5:	mwm-xsession.desktop
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-ac.patch
+Patch2:		%{name}-libdir.patch
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	bison
@@ -177,6 +178,7 @@ Bibliotecas para o lesstif em versão estática.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
 
 ln -sf ../acinclude.m4 test/acinclude.m4
 
