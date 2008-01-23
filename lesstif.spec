@@ -7,7 +7,7 @@ Summary(pl.UTF-8):	LessTif - biblioteka kompatybilna na poziomie źródeł z OSF
 Summary(pt_BR.UTF-8):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.95.0
-Release:	2
+Release:	3
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
@@ -131,7 +131,10 @@ Summary(pl.UTF-8):	Pliki nagłówkowe do API Lesstif/Motif %{motif_ver}
 Summary(pt_BR.UTF-8):	Bibliotecas e arquivos de inclusão para desenvolvimentos com o lesstif
 Group:		X11/Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	XFree86-devel
+Requires:	xorg-lib-libX11-devel
+Requires:	xorg-lib-libXt-devel >= 1.0.0
+Requires:	xorg-proto-xproto-devel
+Requires:	xorg-proto-printproto-devel
 Provides:	motif-devel = %{motif_ver}
 Obsoletes:	openmotif-devel
 Conflicts:	tcl-devel < 8.3.4-8
