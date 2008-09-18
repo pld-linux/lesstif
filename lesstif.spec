@@ -7,7 +7,7 @@ Summary(pl.UTF-8):	LessTif - biblioteka kompatybilna na poziomie źródeł z OSF
 Summary(pt_BR.UTF-8):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.95.0
-Release:	3
+Release:	4
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
@@ -42,9 +42,10 @@ Obsoletes:	lesstif-M20
 Obsoletes:	openmotif < 2.2
 Obsoletes:	openmotif-libs < 2.2
 %endif
+Conflicts:	filesystem < 3.0-20
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
-%define		_wmpropsdir	/usr/share/wm-properties
+%define		_wmpropsdir	/usr/share/gnome/wm-properties
 %define		_appdefsdir	/usr/share/X11/app-defaults
 
 %description
