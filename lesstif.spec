@@ -24,7 +24,7 @@ BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	bison
 BuildRequires:	flex
-BuildRequires:	libtool >= 2.2
+BuildRequires:	libtool
 BuildRequires:	lynx
 BuildRequires:	xorg-lib-libXp-devel
 BuildRequires:	xorg-lib-libXt-devel >= 1.0.0
