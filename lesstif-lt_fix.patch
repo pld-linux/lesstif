@@ -1,0 +1,48 @@
+diff -ur lesstif-0.95.0.orig/acinclude.m4 lesstif-0.95.0/acinclude.m4
+--- lesstif-0.95.0.orig/acinclude.m4	2008-10-21 14:20:13.000000000 +0200
++++ lesstif-0.95.0/acinclude.m4	2008-10-21 14:25:48.000000000 +0200
+@@ -537,7 +537,7 @@
+ CPPFLAGS="$CPPFLAGS $FREETYPE_CFLAGS"
+ AC_CHECK_HEADERS(freetype/freetype.h,,, [#include <ft2build.h>])
+ 
+-LT_HAVE_FREETYPE="no"
++FINDXFT_HAVE_FREETYPE="no"
+ case "$ac_cv_header_freetype_freetype_h" in
+ no)
+ 	CPPFLAGS="$saved_CPPFLAGS"
+@@ -551,7 +551,7 @@
+ 		LIBS="$saved_LIBS"
+ 		;;
+ 	yes)
+-		LT_HAVE_FREETYPE="yes"
++		FINDXFT_HAVE_FREETYPE="yes"
+ 		AC_DEFINE(HAVE_FREETYPE, 1, Means we have discovered the FreeType library)
+ 		AC_SUBST(FREETYPE_CFLAGS)
+ 		;;
+@@ -591,7 +591,7 @@
+ #
+ # Check X configuration
+ #
+-LT_HAVE_XRENDER="no"
++FINDXFT_HAVE_XRENDER="no"
+ case "$have_x" in
+ yes)
+ 	XRENDER_CFLAGS="-I$x_includes"
+@@ -616,7 +616,7 @@
+ 			LIBS="$saved_LIBS"
+ 			;;
+ 		yes)
+-			LT_HAVE_XRENDER="yes"
++			FINDXFT_HAVE_XRENDER="yes"
+ 			AC_DEFINE(HAVE_XRENDER, 1, Means we have discovered the Xrender library)
+ 			AC_SUBST(XRENDER_CFLAGS)
+ 			AC_SUBST(XRENDER_LIBS)
+@@ -710,7 +710,7 @@
+ dnl
+ dnl Should this be conditionally defined ?
+ dnl
+-if test "$LT_HAVE_XRENDER" = "yes" -a "$LT_HAVE_FREETYPE" = "yes"
++if test "$FINDXFT_HAVE_XRENDER" = "yes" -a "$FINDXFT_HAVE_FREETYPE" = "yes"
+ then
+ 	AC_DEFINE(USE_XFT, 1, This means we will be using the Xft library)
+ fi
