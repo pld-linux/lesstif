@@ -7,7 +7,7 @@ Summary(pl.UTF-8):	LessTif - biblioteka kompatybilna na poziomie źródeł z OSF
 Summary(pt_BR.UTF-8):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.95.0
-Release:	5
+Release:	6
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
