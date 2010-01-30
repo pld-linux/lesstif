@@ -6,12 +6,12 @@ Summary(ja.UTF-8):	lesstif - Motif互換ツールキット
 Summary(pl.UTF-8):	LessTif - biblioteka kompatybilna na poziomie źródeł z OSF/Motif %{motif_ver}
 Summary(pt_BR.UTF-8):	Um clone do Motif toolkit
 Name:		lesstif
-Version:	0.95.0
-Release:	6
+Version:	0.95.2
+Release:	1
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
-# Source0-md5:	ab895165c149d7f95843c7584b1c7ad4
+# Source0-md5:	754187dbac09fcf5d18296437e72a32f
 Source1:	Mwm.desktop
 Source2:	mwmrc
 Source3:	mwm.RunWM
