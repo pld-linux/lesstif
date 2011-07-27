@@ -1,3 +1,7 @@
+#
+# Conditional build:
+%bcond_with	gnome		# build with support for GNOME2 wm-properties
+#
 %define		motif_ver	2.1
 %define		mver		%(echo %{motif_ver} | tr -d .)
 Summary:	LessTif - source compatible library with OSF/Motif %{motif_ver}
@@ -7,14 +11,13 @@ Summary(pl.UTF-8):	LessTif - biblioteka kompatybilna na poziomie źródeł z OSF
 Summary(pt_BR.UTF-8):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.95.2
-Release:	1
+Release:	2
 License:	LGPL
 Group:		X11/Libraries
 Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
 # Source0-md5:	754187dbac09fcf5d18296437e72a32f
 Source1:	Mwm.desktop
 Source2:	mwmrc
-Source3:	mwm.RunWM
 Source5:	mwm-xsession.desktop
 Patch0:		%{name}-link.patch
 Patch1:		%{name}-ac.patch
@@ -220,7 +223,7 @@ cd ..
 
 %install
 rm -rf $RPM_BUILD_ROOT
-install -d $RPM_BUILD_ROOT%{_sysconfdir}/{sysconfig/wmstyle,X11} \
+install -d $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm \
 	$RPM_BUILD_ROOT{%{_aclocaldir},%{_datadir}/xsessions,%{_wmpropsdir}}
 
 %{__make} install \
@@ -236,9 +239,8 @@ rm -f doc/www.lesstif.org/INSTALL.html
 # workaround - configure decides not to install *.m4 if aclocaldir is not writable
 install scripts/autoconf/ac_find_motif.m4 $RPM_BUILD_ROOT%{_aclocaldir}
 
-install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}
+%{?with_gnome:install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
-install %{SOURCE3} $RPM_BUILD_ROOT/etc/sysconfig/wmstyle/mwm.sh
 install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/xsessions/mwm.desktop
 
 %clean
@@ -267,9 +269,8 @@ fi
 %defattr(644,root,root,755)
 %doc clients/Motif-%{motif_ver}/mwm/README*
 %dir %{_sysconfdir}/X11/mwm
-%{_wmpropsdir}/Mwm.desktop
+%{?with_gnome:%{_wmpropsdir}/Mwm.desktop}
 %config %{_sysconfdir}/X11/mwm/*
-%attr(755,root,root) /etc/sysconfig/wmstyle/*.sh
 %attr(755,root,root) %{_bindir}/mwm
 
 %{_datadir}/xsessions/mwm.desktop
