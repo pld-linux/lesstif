@@ -1,6 +1,6 @@
 #
 # Conditional build:
-%bcond_with	gnome		# build with support for GNOME2 wm-properties
+%bcond_with	gnome2		# build with support for GNOME2 wm-properties
 #
 %define		motif_ver	2.1
 %define		mver		%(echo %{motif_ver} | tr -d .)
@@ -239,7 +239,7 @@ rm -f doc/www.lesstif.org/INSTALL.html
 # workaround - configure decides not to install *.m4 if aclocaldir is not writable
 install scripts/autoconf/ac_find_motif.m4 $RPM_BUILD_ROOT%{_aclocaldir}
 
-%{?with_gnome:install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}}
+%{?with_gnome2:install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}}
 install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
 install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/xsessions/mwm.desktop
 
@@ -269,7 +269,7 @@ fi
 %defattr(644,root,root,755)
 %doc clients/Motif-%{motif_ver}/mwm/README*
 %dir %{_sysconfdir}/X11/mwm
-%{?with_gnome:%{_wmpropsdir}/Mwm.desktop}
+%{?with_gnome2:%{_wmpropsdir}/Mwm.desktop}
 %config %{_sysconfdir}/X11/mwm/*
 %attr(755,root,root) %{_bindir}/mwm
 
