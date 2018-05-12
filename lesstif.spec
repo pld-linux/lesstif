@@ -12,9 +12,9 @@ Summary(pt_BR.UTF-8):	Um clone do Motif toolkit
 Name:		lesstif
 Version:	0.95.2
 Release:	2
-License:	LGPL
+License:	LGPL v2+
 Group:		X11/Libraries
-Source0:	http://dl.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
+Source0:	http://downloads.sourceforge.net/lesstif/%{name}-%{version}.tar.bz2
 # Source0-md5:	754187dbac09fcf5d18296437e72a32f
 Source1:	Mwm.desktop
 Source2:	mwmrc
@@ -23,6 +23,7 @@ Patch0:		%{name}-link.patch
 Patch1:		%{name}-ac.patch
 Patch2:		%{name}-libdir.patch
 Patch3:		%{name}-lt_fix.patch
+URL:		http://lesstif.sourceforge.net/
 BuildRequires:	autoconf >= 2.59
 BuildRequires:	automake
 BuildRequires:	bison
@@ -232,16 +233,21 @@ install -d $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm \
 	appdir=%{_appdefsdir} \
 	htmldir=/htmldoc
 
-mv -f $RPM_BUILD_ROOT/htmldoc .
+%{__mv} $RPM_BUILD_ROOT/htmldoc .
 
-rm -f doc/www.lesstif.org/INSTALL.html
+%{__rm} doc/www.lesstif.org/INSTALL.html
 
 # workaround - configure decides not to install *.m4 if aclocaldir is not writable
-install scripts/autoconf/ac_find_motif.m4 $RPM_BUILD_ROOT%{_aclocaldir}
+cp -p scripts/autoconf/ac_find_motif.m4 $RPM_BUILD_ROOT%{_aclocaldir}
 
-%{?with_gnome2:install %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}}
-install %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
-install %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/xsessions/mwm.desktop
+%{?with_gnome2:cp -p %{SOURCE1} $RPM_BUILD_ROOT%{_wmpropsdir}}
+cp -p %{SOURCE2} $RPM_BUILD_ROOT%{_sysconfdir}/X11/mwm/system.mwmrc
+cp -p %{SOURCE5} $RPM_BUILD_ROOT%{_datadir}/xsessions/mwm.desktop
+
+# documentation packaged as %doc
+%{__rm} -r $RPM_BUILD_ROOT%{_prefix}/LessTif
+# non-existing utility
+%{__rm} $RPM_BUILD_ROOT%{_mandir}/man1/ltversion.1
 
 %clean
 rm -rf $RPM_BUILD_ROOT
@@ -258,10 +264,14 @@ fi
 %files
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libMrm.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libMrm.so.2
 %attr(755,root,root) %{_libdir}/libUil.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libUil.so.2
 %attr(755,root,root) %{_libdir}/libXm.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libXm.so.2
 %if %{mver} >= 21
 %attr(755,root,root) %{_libdir}/libDtPrint.so.*.*
+%attr(755,root,root) %ghost %{_libdir}/libDtPrint.so.1
 %endif
 %{_mandir}/man1/lesstif.1*
 
@@ -270,12 +280,14 @@ fi
 %doc clients/Motif-%{motif_ver}/mwm/README*
 %dir %{_sysconfdir}/X11/mwm
 %{?with_gnome2:%{_wmpropsdir}/Mwm.desktop}
-%config %{_sysconfdir}/X11/mwm/*
+%{_sysconfdir}/X11/mwm/README
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/X11/mwm/alt.map
+%config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/X11/mwm/system.mwmrc
 %attr(755,root,root) %{_bindir}/mwm
 
 %{_datadir}/xsessions/mwm.desktop
 
-%{_appdefsdir}/*
+%{_appdefsdir}/Mwm
 
 %{_mandir}/man1/mwm.1*
 %{_mandir}/man5/mwmrc.5*
@@ -287,6 +299,7 @@ fi
 %attr(755,root,root) %{_bindir}/xmbind
 %{_mandir}/man1/uil.1*
 %{_mandir}/man1/xmbind.1*
+%{_mandir}/man5/VirtualBindings.5*
 
 %files devel
 %defattr(644,root,root,755)
@@ -327,7 +340,7 @@ fi
 %{_mandir}/man3/UnNamedObj.3*
 %{_mandir}/man3/VendorShell.3*
 %{_mandir}/man3/WmShell.3*
-%{_mandir}/man3/Xm*
+%{_mandir}/man3/Xm*.3*
 
 %files static
 %defattr(644,root,root,755)
